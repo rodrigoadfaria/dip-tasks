@@ -30,6 +30,7 @@
     keywordstyle=\color{deepblue}\bfseries,
     commentstyle=\color{deepgreen},
     stringstyle=\ttfamily\color{deepred!50!brown},
+    breaklines=true,
     showstringspaces=false}
 \lstset{literate=%
    *{0}{{{\color{red!20!violet}0}}}1
@@ -79,57 +80,56 @@ TODO
 \item Implemente o método ELA (Error Level Analysis) em Python (apresente o 
 \textbf{algoritmo} na prova e anexe o código em Python no arquivo zip).
 
-Abaixo o trecho onde o algoritmo efetivamente foi implementado. O código completo está em \textbf{source/ela.py}. Os comentários
-foram mantidos em inglês para evitar problemas de codificação do arquivo fonte.
+Abaixo o trecho onde o algoritmo efetivamente foi implementado. O código completo está em \textbf{source/ela.py}.
     
-    \begin{lstlisting}[basicstyle=\ttfamily]
-    import os
-    from PIL import Image, ImageChops, ImageEnhance
-    from time import gmtime, strftime
+\begin{lstlisting}[basicstyle=\ttfamily]
+import os
+from PIL import Image, ImageChops, ImageEnhance
+from time import gmtime, strftime
+
+# you can change the image directory here
+HOAX_IMAGES = './HoaxImages/'
+
+def check_image(img_path, scale=20.0, show=False):
+    """ Compute the Error Level Analysis for the given image
     
-    # you can change the image directory here
-    HOAX_IMAGES = './HoaxImages/'
+    Save a copy of the given image changing its error rate, in our case 95%,
+    and compute the difference between this image over the original. In addition, a
+    scale is also applied to the final result for better viewing.
     
-    def check_image(img_path, scale=20.0, show=False):
-        """ Compute the Error Level Analysis for the given image
-        
-        Save a copy of the given image changing its error rate, in our case 95%,
-        and compute the difference between this image over the original. In addition, a
-        scale is also applied to the final result for better viewing.
-        
-        References: 
-        http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
-        http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf
-        """
-        try:
-            img = Image.open(img_path)
-        except FileNotFoundError:
-            print ("File '"+ img_path +"' not found.")
-            return
-        
-        # check the image format for JPEG only
-        if img.format is not 'JPEG':
-            log(img_path + ' is not a JPEG file')
-            return
+    References: 
+    http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
+    http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf
+    """
+    try:
+        img = Image.open(img_path)
+    except FileNotFoundError:
+        print ("File '"+ img_path +"' not found.")
+        return
     
-        log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
-        short_file_name = os.path.splitext(img_path)[0]
-        
-        # save a copy of the image with a different inferior error rate
-        resaved_path = short_file_name + '_resaved'
-        img.save(resaved_path, 'JPEG', quality=95)
-        resaved_img = Image.open(resaved_path)
-        
-        # compute the difference between the given image and the image
-        # generated applying a scale to increase the brightness
-        ela_img = ImageChops.difference(img, resaved_img)
-        ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
-        ela_img.save(short_file_name + '_ela.png')
-        if (show):
-            ela_img.show()
-        
-        os.remove(resaved_path)
-    \end{lstlisting}
+    # check the image format for JPEG only
+    if img.format is not 'JPEG':
+        log(img_path + ' is not a JPEG file')
+        return
+
+    log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
+    short_file_name = os.path.splitext(img_path)[0]
+    
+    # save a copy of the image with a different inferior error rate
+    resaved_path = short_file_name + '_resaved'
+    img.save(resaved_path, 'JPEG', quality=95)
+    resaved_img = Image.open(resaved_path)
+    
+    # compute the difference between the given image and the image
+    # generated applying a scale to increase the brightness
+    ela_img = ImageChops.difference(img, resaved_img)
+    ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
+    ela_img.save(short_file_name + '_ela.png')
+    if (show):
+        ela_img.show()
+    
+    os.remove(resaved_path)
+\end{lstlisting}
 
 \item Teste seu algoritmo com as imagens que deixei no paca para este exercício. 
 Quantas imagens seriam consideradas modificadas por esse método? Comente o resultado,
