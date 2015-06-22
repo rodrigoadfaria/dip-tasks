@@ -1,16 +1,20 @@
 import os
-
 from PIL import Image, ImageChops, ImageEnhance
 from time import gmtime, strftime
 
+# you can change the image directory here
 HOAX_IMAGES = './HoaxImages/'
 
 def check_image(img_path, scale=20.0, show=False):
-    """ Calcula o Error Level Analysis para a imagem dada
+    """ Compute the Error Level Analysis for the given image
     
-    Salva uma cópia da imagem alterando sua qualidade, neste caso 95%,
-    e calcula a diferença desta para a original. Uma escala também é
-    aplicada no resultado final para facilitar a visualização.
+    Save a copy of the given image changing its error rate, in our case 95%,
+    and compute the difference between this image over the original. In addition, a
+    scale is also applied to the final result for better viewing.
+    
+    References: 
+    http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
+    http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf
     """
     try:
         img = Image.open(img_path)
@@ -18,7 +22,7 @@ def check_image(img_path, scale=20.0, show=False):
         print ("File '"+ img_path +"' not found.")
         return
     
-    # verifica se a imagem origem está no formato JPEG
+    # check the image format for JPEG only
     if img.format is not 'JPEG':
         log(img_path + ' is not a JPEG file')
         return
@@ -26,13 +30,13 @@ def check_image(img_path, scale=20.0, show=False):
     log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
     short_file_name = os.path.splitext(img_path)[0]
     
-    # salva a imagem dada com uma qualidade inferior
+    # save a copy of the image with a different inferior error rate
     resaved_path = short_file_name + '_resaved'
     img.save(resaved_path, 'JPEG', quality=95)
     resaved_img = Image.open(resaved_path)
     
-    # calcula a diferença entre a imagem original e a imagem alterada
-    # aplicando uma escala para aumentar o brilho
+    # compute the difference between the given image and the image
+    # generated applying a scale to increase the brightness
     ela_img = ImageChops.difference(img, resaved_img)
     ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
     ela_img.save(short_file_name + '_ela.png')
