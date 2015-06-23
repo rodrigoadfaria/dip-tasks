@@ -8,9 +8,10 @@ HOAX_IMAGES = './HoaxImages/'
 def check_image(img_path, scale=20.0, show=False):
     """ Compute the Error Level Analysis for the given image
     
-    Save a copy of the given image changing its error rate, in our case 95%,
-    and compute the difference between this image over the original. In addition, a
-    scale is also applied to the final result for better viewing.
+    Save a copy of the given image changing its quality level,
+    in our case 95%, and compute the difference between this 
+    image over the original. In addition, a scale is also 
+    applied to the final result for better viewing.
     
     References: 
     http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
@@ -30,7 +31,7 @@ def check_image(img_path, scale=20.0, show=False):
     log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
     short_file_name = os.path.splitext(img_path)[0]
     
-    # save a copy of the image with a different inferior error rate
+    # save a copy of the image with a different inferior quality level
     resaved_path = short_file_name + '_resaved'
     img.save(resaved_path, 'JPEG', quality=95)
     resaved_img = Image.open(resaved_path)
