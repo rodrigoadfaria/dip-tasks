@@ -181,12 +181,44 @@ f(x) = \left\{ \begin{array}{rl}
        \end{array} \right.
 \end{eqnarray*}
 
-\textbf{TODO}
+Por definição, temos que a transformada de Fourier de um pulso
+retangular de largura $D$ e altura $A$ tem a forma dada por:
+
+\begin{eqnarray*}
+    F(\omega) = ADsinc(\frac{\omega D}{2})  = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}}
+\end{eqnarray*}
+
+Podendo ser representada graficamente como:
+\begin{figure}[htb]
+\centering   
+\begin{minipage}[b]{0.45\textwidth}
+	\centering
+        \includegraphics[scale=0.3]{Q3Images/pulse_function.png} 
+\end{minipage}
+\end{figure}
+
+Onde:
+\begin{eqnarray*}
+f(x) = \left\{ \begin{array}{rl} 
+ A, &\mbox{ $x \in  [\frac{-D}{2}, \frac{D}{2}]$} \\
+ 0, &\mbox{ $x \notin [\frac{-D}{2}, \frac{D}{2}]$}
+       \end{array} \right.
+\end{eqnarray*}
+
+Logo, temos que A = 7 e D = 10 e, portanto, a transformada de Fourier da função $f(x)$ é:
+\begin{eqnarray*}
+    F(\omega) = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \
+              = 7*10\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \
+              = 70\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \
+              = 70\frac{sin(5\omega)}{5\omega}
+\end{eqnarray*}
+
+%%%
 \item Encontre a transformada de Fourier da função $ g(x) = f(x)\cos
    \omega_0 x$, sabendo que a transformada de Fourier de $f(x)$ é dada
    por $F(\omega)$
-   
-\textbf{TODO}
+
+
 \item Ache a inversa da transformada de Fourier de $G(\omega) =
   20\frac{\sin 5\omega}{5\omega}e^{-3\omega i}$
   
