@@ -10,6 +10,9 @@
 \usepackage{url}
 \usepackage{xcolor,listings}
 
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
 %\setlength{\parskip}{0.1cm}
 \setlength{\paperheight}{29.7cm}
 \setlength{\textheight}{23.0cm}
@@ -75,7 +78,8 @@ para a graduação e 15 pontos para a pós-graduação (pois são 4 questões).
 \end{itemize} 
 \begin{itemize}
 \item Faça um resumo do artigo de acordo com as indicações que deixei no paca (artigos sobre como fazer um resumo).
-TODO
+
+\textbf{TODO}
 
 \item Implemente o método ELA (Error Level Analysis) em Python (apresente o 
 \textbf{algoritmo} na prova e anexe o código em Python no arquivo zip).
@@ -116,7 +120,7 @@ def check_image(img_path, scale=20.0, show=False):
     log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
     short_file_name = os.path.splitext(img_path)[0]
     
-    # save a copy of the image with a different inferior quality level rate
+    # save a copy of the image with a different inferior quality level
     resaved_path = short_file_name + '_resaved'
     img.save(resaved_path, 'JPEG', quality=95)
     resaved_img = Image.open(resaved_path)
@@ -135,11 +139,34 @@ def check_image(img_path, scale=20.0, show=False):
 \item Teste seu algoritmo com as imagens que deixei no paca para este exercício. 
 Quantas imagens seriam consideradas modificadas por esse método? Comente o resultado,
 comparando com a sua intuição.
-Uma vez submetida a imagem ao Error Level Analysis, pode-se perceber pelo resultado que 
-a região manipulada terá um nível de erro diferente do que as regiões não manipuladas. Logo, 
-o nível de erro irá expor a região manipulada rotulando as regiões com maior alteração após
-a imagem ser salva com um nível de qualidade inferior (Krawetz).
 
+Uma vez submetida a imagem ao \textit{Error Level Analysis}, pode-se perceber pelo resultado que 
+a região manipulada terá um nível de erro diferente das regiões não manipuladas. Logo, 
+o nível de erro irá expor a região manipulada rotulando as regiões com maior alteração após
+a imagem ser salva com um nível de qualidade inferior \cite{krawetz}.
+
+Na Figura 1b, podemos ver o resultado do ELA na imagem dada. As regiões com maior chance de ter
+alterações são as que apresentam os pixels com maior brilho, uma vez que a alteração da imagem 
+causa instabilidade nestas áreas.
+\begin{figure}[htb]
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+	\centering
+        \includegraphics[scale=0.3]{Q3Images/cows_on_beach.jpg} 
+	\centerline{\label{fig1a} \small (1a) Imagem original}
+\end{minipage}
+\begin{minipage}[b]{0.45\textwidth}
+	\centering
+        \includegraphics[scale=0.3]{Q3Images/cows_on_beach_ela.png} 
+	\centerline{\label{fig1b} \small (1b) Imagem com o resultado do ELA}
+\end{minipage}
+\end{figure}
+
+Os resultados foram avaliados de acordo com o brilho das bordas que devem ser semelhantes no resultado 
+da aplicação do ELA na imagem. Além disso, regiões de cores e texturas semelhantes na imagem
+original, independentemente da cor, também devem ter cores aproximadamente similares no ELA \cite{berkeleywebsite}.
+
+Isto posto, um total de 23 imagens foram consideradas alteradas de acordo com o método e avaliação a posteriori.
 \end{itemize}
 %
 %
@@ -153,12 +180,20 @@ f(x) = \left\{ \begin{array}{rl}
  0 &\mbox{ caso contrário}
        \end{array} \right.
 \end{eqnarray*}
+
+\textbf{TODO}
 \item Encontre a transformada de Fourier da função $ g(x) = f(x)\cos
    \omega_0 x$, sabendo que a transformada de Fourier de $f(x)$ é dada
    por $F(\omega)$
+   
+\textbf{TODO}
 \item Ache a inversa da transformada de Fourier de $G(\omega) =
   20\frac{\sin 5\omega}{5\omega}e^{-3\omega i}$
+  
+\textbf{TODO}
 \item Calcule a DFT do sinal $f = \{1,3,5,3,1\}$
+
+\textbf{TODO}
 \end{itemize}
 %
 %
@@ -166,33 +201,42 @@ f(x) = \left\{ \begin{array}{rl}
 \item[{\bf Q3.}] 
 \begin{itemize}
 \item Calcule (apresente os cálculos) dos descritores de Fourier das
-  figuras 1a e 1b. Lembre-se que os pontos da
+  figuras 3a e 3b. Lembre-se que os pontos da
   borda do quadrado serão representados por pontos no plano de
   Argand-Gauss. Isto é, cada ponto no plano passa a ser um número
   complexo e a borda passa a ser um vetor de pontos complexos, como
   num sinal, mas com valores complexos.
+
+\textbf{TODO}
+
 \item Para confirmar que seus cálculos estão corretos, implemente um
   programa em Python que receba como entrada um vetor de números
   complexos (que são as coordenadas das bordas) e retorne os
   descritores de Fourier do vetor de entrada. Você pode usar as
   funções fornecidas pela biblioteca NUMPY para facilitar a
-  programação. 
+  programação.
+  
+\textbf{TODO}
+
 \item Para reconstruir a curva, faça uma função que receba um vetor
   com os descritores de Fourier, um número $N$ de descritores a serem
   usados e grafique os pontos num plano cartesiano (para fazer a mesma 
 figura que fizemos nos slides das aulas 15 e 16.
+
+\textbf{TODO}
+
 \end{itemize}
 \begin{figure}[htb]
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 	\centering
         \includegraphics[scale=0.2]{Q3Images/square1.jpg} 
-	\centerline{\label{fig1a} \small (1a) Quadrado de lado 1}
+	\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 	\centering
         \includegraphics[scale=0.3]{Q3Images/square3.jpg} 
-	\centerline{\label{fig1b} \small (1b) Quadrado de lado 3}
+	\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
 \end{minipage}
 \end{figure}
 
@@ -213,4 +257,6 @@ figura que fizemos nos slides das aulas 15 e 16.
 \item Quais são os métodos de encontrar borda apresentados no artigo?
 \end{itemize}
 \end{itemize}
+
+\printbibliography
 \end{document}
