@@ -1,0 +1,1 @@
+zip -9 -r --exclude=*.git* --exclude=*documents*  --exclude=*HoaxImages* prova_visao_pdi.zip .
