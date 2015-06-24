@@ -206,19 +206,28 @@ f(x) = \left\{ \begin{array}{rl}
 \end{eqnarray*}
 
 Logo, temos que A = 7 e D = 10 e, portanto, a transformada de Fourier da função $f(x)$ é:
-\begin{eqnarray*}
-    F(\omega) = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \
-              = 7*10\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \
-              = 70\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \
-              = 70\frac{sin(5\omega)}{5\omega}
-\end{eqnarray*}
+\begin{align*}
+    F(\omega) &= AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \\
+              &= 7*10\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
+              &= 70\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
+              &= 70\frac{sin(5\omega)}{5\omega}
+\end{align*}
 
 %%%
 \item Encontre a transformada de Fourier da função $ g(x) = f(x)\cos
    \omega_0 x$, sabendo que a transformada de Fourier de $f(x)$ é dada
    por $F(\omega)$
 
+Tomando a propriedade da modulação:
+\begin{align*}
+    \mathcal{F}[x(t)cos(\omega_0t)] = \frac{1}{2}[F(\omega + \omega_0) + F(\omega - \omega_0)]
+\end{align*}
+Temos que a transformada de Fourier da função $g(x)$ é:
+\begin{align*}
+    G(\omega) = \frac{1}{2}F(\omega + \omega_0) + \frac{1}{2}F(\omega - \omega_0)
+\end{align*}
 
+%%%
 \item Ache a inversa da transformada de Fourier de $G(\omega) =
   20\frac{\sin 5\omega}{5\omega}e^{-3\omega i}$
   
@@ -234,7 +243,7 @@ Para realizar os cálculos devemos utilizar a identidade de Euler:
 \begin{align*}
     e^{-j \pi} = \cos \pi - j\sin\pi
 \end{align*}
-Devemos utilizar a seguinte equação para calcular a DFT do sinal dada:
+Devemos utilizar a seguinte equação para calcular a DFT do sinal dado por $f(x)$:
 \begin{align*}
     X[k] = \sum\limits_{n=0}^{N-1} x[n] e^{-jk\frac{2\pi}{N}n},\qquad para\quad k=0,1,2,...,N-1
 \end{align*}
