@@ -9,7 +9,7 @@
 \usepackage{float}
 \usepackage{url}
 \usepackage{xcolor,listings}
-\usepackage{amsmath}
+\usepackage{amsmath,mathrsfs}
 \usepackage{biblatex}
 \addbibresource{references.bib}
 
@@ -28,319 +28,373 @@
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
 \begin{document}
-
-\lstset{language=python,
-    keywordstyle=\color{deepblue}\bfseries,
-    commentstyle=\color{deepgreen},
-    stringstyle=\ttfamily\color{deepred!50!brown},
-    breaklines=true,
-    showstringspaces=false}
-\lstset{literate=%
-   *{0}{{{\color{red!20!violet}0}}}1
-    {1}{{{\color{red!20!violet}1}}}1
-    {2}{{{\color{red!20!violet}2}}}1
-    {3}{{{\color{red!20!violet}3}}}1
-    {4}{{{\color{red!20!violet}4}}}1
-    {5}{{{\color{red!20!violet}5}}}1
-    {6}{{{\color{red!20!violet}6}}}1
-    {7}{{{\color{red!20!violet}7}}}1
-    {8}{{{\color{red!20!violet}8}}}1
-    {9}{{{\color{red!20!violet}9}}}1
-}
-
-\begin{center}
-{\sf {\large Vis√£o e Processamento de Imagens - Avalia√ß√£o √∫nica -
-    Parte II}}
-
-\textbf{Preste aten√ß√£o para as regras da prova}
-\end{center}
-1- O fonte latex (.tex) da prova ser√° disponibilizado para facilitar
-que voc√™ n√£o tenha que copiar o enunciado das quest√µes. Todas as quest√µes
-devem ser respondidas no mesmo arquivo.
-
-\noindent 2- A prova √© \textbf{individual}.  √â permitido a consulta a
-livros, apontamentos ou Internet, desde que devidamente referenciada.
-N√£o √© permitida a consulta a colegas, amigos, fam√≠lia, cachorro,
-papagaio e etc. 
-
-\noindent 3- A prova deve ser entregue diretamente no Paca, assim como
-todos os c√≥digos e imagens devem ser entregues no mesmo arquivo
-comprimido.  \textbf{Dura√ß√£o da prova: 14 dias}.  
-
-\noindent 4- Cada quest√£o vale 20 pontos (pois s√£o apenas 3 quest√µes)
-para a gradua√ß√£o e 15 pontos para a p√≥s-gradua√ß√£o (pois s√£o 4 quest√µes). 
-\bigskip
-
-\begin{itemize}
-\item[{\bf Q1.}] Para fazer esta quest√£o, leia primeiro o artigo abaixo:
-\begin{itemize}
-\item \url{http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf}
-\end{itemize} 
-\begin{itemize}
-\item Fa√ßa um resumo do artigo de acordo com as indica√ß√µes que deixei no paca (artigos sobre como fazer um resumo).
-
-\textbf{TODO}
-
-\item Implemente o m√©todo ELA (Error Level Analysis) em Python (apresente o 
-\textbf{algoritmo} na prova e anexe o c√≥digo em Python no arquivo zip).
-
-Abaixo o trecho onde o algoritmo efetivamente foi implementado. O c√≥digo completo est√° em \textbf{source/ela.py}.
-    
-\begin{lstlisting}[basicstyle=\ttfamily]
-import os
-from PIL import Image, ImageChops, ImageEnhance
-from time import gmtime, strftime
-
-# you can change the image directory here
-HOAX_IMAGES = './HoaxImages/'
-
-def check_image(img_path, scale=20.0, show=False):
-    """ Compute the Error Level Analysis for the given image
-    
-    Save a copy of the given image changing its quality level,
-    in our case 95%, and compute the difference between this 
-    image over the original. In addition, a scale is also 
-    applied to the final result for better viewing.
-    
-    References: 
-    http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
-    http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf
-    """
-    try:
-        img = Image.open(img_path)
-    except FileNotFoundError:
-        print ("File '"+ img_path +"' not found.")
-        return
-    
-    # check the image format for JPEG only
-    if img.format is not 'JPEG':
-        log(img_path + ' is not a JPEG file')
-        return
-
-    log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
-    short_file_name = os.path.splitext(img_path)[0]
-    
-    # save a copy of the image with a different inferior quality level
-    resaved_path = short_file_name + '_resaved'
-    img.save(resaved_path, 'JPEG', quality=95)
-    resaved_img = Image.open(resaved_path)
-    
-    # compute the difference between the given image and the image
-    # generated applying a scale to increase the brightness
-    ela_img = ImageChops.difference(img, resaved_img)
-    ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
-    ela_img.save(short_file_name + '_ela.png')
-    if (show):
-        ela_img.show()
-    
-    os.remove(resaved_path)
-\end{lstlisting}
-
-\item Teste seu algoritmo com as imagens que deixei no paca para este exerc√≠cio. 
-Quantas imagens seriam consideradas modificadas por esse m√©todo? Comente o resultado,
-comparando com a sua intui√ß√£o.
-
-Uma vez submetida a imagem ao \textit{Error Level Analysis}, pode-se perceber pelo resultado que 
-a regi√£o manipulada ter√° um n√≠vel de erro diferente das regi√µes n√£o manipuladas. Logo, 
-o n√≠vel de erro ir√° expor a regi√£o manipulada rotulando as regi√µes com maior altera√ß√£o ap√≥s
-a imagem ser salva com um n√≠vel de qualidade inferior \cite{krawetz}.
-
-Na Figura 1b, podemos ver o resultado do ELA na imagem dada. As regi√µes com maior chance de ter
-altera√ß√µes s√£o as que apresentam os pixels com maior brilho, uma vez que a altera√ß√£o da imagem 
-causa instabilidade nestas √°reas.
-\begin{figure}[htb]
-\centering
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.3]{Q3Images/cows_on_beach.jpg} 
-	\centerline{\label{fig1a} \small (1a) Imagem original}
-\end{minipage}
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.3]{Q3Images/cows_on_beach_ela.png} 
-	\centerline{\label{fig1b} \small (1b) Imagem com o resultado do ELA}
-\end{minipage}
-\end{figure}
-
-Os resultados foram avaliados de acordo com o brilho das bordas que devem ser semelhantes no resultado 
-da aplica√ß√£o do ELA na imagem. Al√©m disso, regi√µes de cores e texturas semelhantes na imagem
-original, independentemente da cor, tamb√©m devem ter cores aproximadamente similares no ELA \cite{berkeleywebsite}.
-
-Isto posto, um total de 23 imagens foram consideradas alteradas de acordo com o m√©todo e avalia√ß√£o a posteriori.
-\end{itemize}
-%
-%
-%
-\item[{\bf Q2.}] Esta quest√£o refere-se √† transformada de Fourier.
-\begin{itemize}
-\item Encontre a transformada de Fourier da fun√ß√£o:
-\begin{eqnarray*}
-f(x) = \left\{ \begin{array}{rl} 
- 7 &\mbox{ if $-5 < x < 5$} \\
- 0 &\mbox{ caso contr√°rio}
-       \end{array} \right.
-\end{eqnarray*}
-
-Por defini√ß√£o, temos que a transformada de Fourier de um pulso
-retangular de largura $D$ e altura $A$ tem a forma dada por:
-
-\begin{eqnarray*}
-    F(\omega) = ADsinc(\frac{\omega D}{2})  = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}}
-\end{eqnarray*}
-
-A fun√ß√£o $f(x)$ pode ser representada graficamente como:
-\begin{figure}[htb]
-\centering   
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.3]{Q3Images/pulse_function.png} 
-\end{minipage}
-\end{figure}
-
-Onde:
-\begin{eqnarray*}
-f(x) = \left\{ \begin{array}{rl} 
- A, &\mbox{ $x \in  [\frac{-D}{2}, \frac{D}{2}]$} \\
- 0, &\mbox{ $x \notin [\frac{-D}{2}, \frac{D}{2}]$}
-       \end{array} \right.
-\end{eqnarray*}
-
-Logo, temos que A = 7 e D = 10 e, portanto, a transformada de Fourier da fun√ß√£o $f(x)$ √©:
-\begin{align*}
-    F(\omega) &= AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \\
-              &= 7*10\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
-              &= 70\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
-              &= 70\frac{sin(5\omega)}{5\omega}
-\end{align*}
-
-%%%
-\item Encontre a transformada de Fourier da fun√ß√£o $ g(x) = f(x)\cos
-   \omega_0 x$, sabendo que a transformada de Fourier de $f(x)$ √© dada
-   por $F(\omega)$
-
-Tomando a propriedade da modula√ß√£o:
-\begin{align*}
-    \mathcal{F}[x(t)cos(\omega_0t)] = \frac{1}{2}[F(\omega + \omega_0) + F(\omega - \omega_0)]
-\end{align*}
-Temos que a transformada de Fourier da fun√ß√£o $g(x)$ √©:
-\begin{align*}
-    G(\omega) = \frac{1}{2}F(\omega + \omega_0) + \frac{1}{2}F(\omega - \omega_0)
-\end{align*}
-
-%%%
-\item Ache a inversa da transformada de Fourier de $G(\omega) =
-  20\frac{\sin 5\omega}{5\omega}e^{-3\omega i}$
-  
-\textbf{TODO}
-\item Calcule a DFT do sinal $f = \{1,3,5,3,1\}$
-
-A DFT √© dada por:
-\begin{align*}
-    F(k) = \sum\limits_{n=0}^{N-1} f(n) e^{-jk\frac{2\pi}{N}n}
-\end{align*}
-
-Para realizar os c√°lculos devemos utilizar a identidade de Euler:
-\begin{align*}
-    e^{-j \pi} = \cos \pi - j\sin\pi
-\end{align*}
-Devemos utilizar a seguinte equa√ß√£o para calcular a DFT do sinal dado por $f(x)$:
-\begin{align*}
-    X[k] = \sum\limits_{n=0}^{N-1} x[n] e^{-jk\frac{2\pi}{N}n},\qquad para\quad k=0,1,2,...,N-1
-\end{align*}
-Temos que N=5, logo:
-\begin{align*}
-    &X[0] = (1e^0 + 3e^0 + 5e^0 + 3e^0 + 1e^0) &\\
-    &X[1] = (1e^0 + 3e^{-j1\frac{2\pi}{5}1} + 5e^{-j1\frac{2\pi}{5}2} + 3e^{-j1\frac{2\pi}{5}3} + 1e^{-j1\frac{2\pi}{5}4)} &\\
-    &X[2] = (1e^0 + 3e^{-j2\frac{2\pi}{5}1} + 5e^{-j2\frac{2\pi}{5}2} + 3e^{-j2\frac{2\pi}{5}3} + 1e^{-j2\frac{2\pi}{5}4)} &\\
-    &X[3] = (1e^0 + 3e^{-j3\frac{2\pi}{5}1} + 5e^{-j3\frac{2\pi}{5}2} + 3e^{-j3\frac{2\pi}{5}3} + 1e^{-j3\frac{2\pi}{5}4)} &\\
-    &X[4] = (1e^0 + 3e^{-j4\frac{2\pi}{5}1} + 5e^{-j4\frac{2\pi}{5}2} + 3e^{-j4\frac{2\pi}{5}3} + 1e^{-j4\frac{2\pi}{5}4)} &\\
-    &X[0] = (1 + 3 + 5 + 3 + 1) &\\
-    &X[1] = (1 + 3e^{-j\frac{2\pi}{5}} + 5e^{-j\frac{4\pi}{5}}  + 3e^{-j\frac{6\pi}{5}}  + 1e^{-j\frac{8\pi}{5})} &\\
-    &X[2] = (1 + 3e^{-j\frac{4\pi}{5}} + 5e^{-j\frac{6\pi}{5}}  + 3e^{-j\frac{12\pi}{5}} + 1e^{-j\frac{16\pi}{5})} &\\
-    &X[3] = (1 + 3e^{-j\frac{6\pi}{5}} + 5e^{-j\frac{12\pi}{5}} + 3e^{-j\frac{18\pi}{5}} + 1e^{-j\frac{24\pi}{5})} &\\
-    &X[4] = (1 + 3e^{-j\frac{8\pi}{5}} + 5e^{-j\frac{16\pi}{5}} + 3e^{-j\frac{24\pi}{5}} + 1e^{-j\frac{32\pi}{5})}&
-\end{align*}
-Calculando cada componente com a rela√ß√£o de Euler e substituindo os resultados na equa√ß√£o acima:
-\begin{align*}
-    &e^{-j\frac{2\pi}{5}} = cos(\frac{2\pi}{5}) - jsen(\frac{2\pi}{5}) = 0,30902  - 0,95106j &\\
-    &e^{-j\frac{4\pi}{5}} = cos(\frac{4\pi}{5}) - jsen(\frac{4\pi}{5}) = -0,80902 - 0,58779j &\\
-    &e^{-j\frac{6\pi}{5}} = cos(\frac{6\pi}{5}) - jsen(\frac{6\pi}{5}) = -0,80902 + 0,58779j &\\
-    &e^{-j\frac{8\pi}{5}} = cos(\frac{8\pi}{5}) - jsen(\frac{8\pi}{5}) = 0,30902  - 0,95106j &\\
-    &e^{-j\frac{12\pi}{5}} = cos(\frac{12\pi}{5}) - jsen(\frac{12\pi}{5}) = 0,30902	-0,95106j &\\
-    &e^{-j\frac{16\pi}{5}} = cos(\frac{16\pi}{5}) - jsen(\frac{16\pi}{5}) = -0,80902 + 0,58779j &\\
-    &e^{-j\frac{18\pi}{5}} = cos(\frac{18\pi}{5}) - jsen(\frac{18\pi}{5}) = 0,30902 + 0,95106j &\\
-    &e^{-j\frac{24\pi}{5}} = cos(\frac{24\pi}{5}) - jsen(\frac{24\pi}{5}) = -0,80902 - 0,58779j &\\
-    &e^{-j\frac{32\pi}{5}} = cos(\frac{32\pi}{5}) - jsen(\frac{32\pi}{5}) = 0,30902	- 0,95106j&
-\end{align*}
-Temos ent√£o que o resultado da DFT √©:
-\begin{multline*}
-    X[f] = 13, -4.236067-3.077683j, 0.236067+0.726542j, \\
-           0.236067-0.726542j, -4.236067+3.077683j
-\end{multline*}
-
-\end{itemize}
-%
-%
-%
-\item[{\bf Q3.}] 
-\begin{itemize}
-\item Calcule (apresente os c√°lculos) dos descritores de Fourier das
-  figuras 3a e 3b. Lembre-se que os pontos da
-  borda do quadrado ser√£o representados por pontos no plano de
-  Argand-Gauss. Isto √©, cada ponto no plano passa a ser um n√∫mero
-  complexo e a borda passa a ser um vetor de pontos complexos, como
-  num sinal, mas com valores complexos.
-
-\textbf{TODO}
-
-\item Para confirmar que seus c√°lculos est√£o corretos, implemente um
-  programa em Python que receba como entrada um vetor de n√∫meros
-  complexos (que s√£o as coordenadas das bordas) e retorne os
-  descritores de Fourier do vetor de entrada. Voc√™ pode usar as
-  fun√ß√µes fornecidas pela biblioteca NUMPY para facilitar a
-  programa√ß√£o.
-  
-\textbf{TODO}
-
-\item Para reconstruir a curva, fa√ßa uma fun√ß√£o que receba um vetor
-  com os descritores de Fourier, um n√∫mero $N$ de descritores a serem
-  usados e grafique os pontos num plano cartesiano (para fazer a mesma 
-figura que fizemos nos slides das aulas 15 e 16.
-
-\textbf{TODO}
-
-\end{itemize}
-\begin{figure}[htb]
-\centering
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.2]{Q3Images/square1.jpg} 
-	\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
-\end{minipage}
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.3]{Q3Images/square3.jpg} 
-	\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
-\end{minipage}
-\end{figure}
-
-%
-%
-%
-\item[{\bf Q4.}] \textbf{Apenas para os alunos de p√≥s-gradua√ß√£o} 
-\begin{itemize}
-\item Leia o artigo do Torre e do Poggio
-  \url{ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-768.pdf}
-  e fa√ßa um resumo de acordo com as indica√ß√µes que deixei no
-  paca (artigos sobre como fazer um resumo). 
-\item O que √© um problema mal-posto?
-\item O que √© regulariza√ß√£o? 
-\item Qual a import√¢ncia do teorema apresentado no artigo?
-\item O que s√£o filtros de banda limitada? Qual a sua import√¢ncia no
-  artigo?
-\item Quais s√£o os m√©todos de encontrar borda apresentados no artigo?
-\end{itemize}
-\end{itemize}
-
-\printbibliography
+	
+	\lstset{language=python,
+		keywordstyle=\color{deepblue}\bfseries,
+		commentstyle=\color{deepgreen},
+		stringstyle=\ttfamily\color{deepred!50!brown},
+		breaklines=true,
+		showstringspaces=false}
+	\lstset{literate=%
+		*{0}{{{\color{red!20!violet}0}}}1
+		{1}{{{\color{red!20!violet}1}}}1
+		{2}{{{\color{red!20!violet}2}}}1
+		{3}{{{\color{red!20!violet}3}}}1
+		{4}{{{\color{red!20!violet}4}}}1
+		{5}{{{\color{red!20!violet}5}}}1
+		{6}{{{\color{red!20!violet}6}}}1
+		{7}{{{\color{red!20!violet}7}}}1
+		{8}{{{\color{red!20!violet}8}}}1
+		{9}{{{\color{red!20!violet}9}}}1
+	}
+	
+	\begin{center}
+		{\sf {\large Vis„o e Processamento de Imagens - AvaliaÁ„o ˙nica -
+				Parte II}}
+		
+		\textbf{Preste atenÁ„o para as regras da prova}
+	\end{center}
+	1- O fonte latex (.tex) da prova ser· disponibilizado para facilitar
+	que vocÍ n„o tenha que copiar o enunciado das questıes. Todas as questıes
+	devem ser respondidas no mesmo arquivo.
+	
+	\noindent 2- A prova È \textbf{individual}.  … permitido a consulta a
+	livros, apontamentos ou Internet, desde que devidamente referenciada.
+	N„o È permitida a consulta a colegas, amigos, famÌlia, cachorro,
+	papagaio e etc. 
+	
+	\noindent 3- A prova deve ser entregue diretamente no Paca, assim como
+	todos os cÛdigos e imagens devem ser entregues no mesmo arquivo
+	comprimido.  \textbf{DuraÁ„o da prova: 14 dias}.  
+	
+	\noindent 4- Cada quest„o vale 20 pontos (pois s„o apenas 3 questıes)
+	para a graduaÁ„o e 15 pontos para a pÛs-graduaÁ„o (pois s„o 4 questıes). 
+	\bigskip
+	
+	\begin{itemize}
+		\item[{\bf Q1.}] Para fazer esta quest„o, leia primeiro o artigo abaixo:
+		\begin{itemize}
+			\item \url{http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf}
+		\end{itemize} 
+		\begin{itemize}
+			\item FaÁa um resumo do artigo de acordo com as indicaÁıes que deixei no paca (artigos sobre como fazer um resumo).
+			
+			\textbf{TODO}
+			
+			\item Implemente o mÈtodo ELA (Error Level Analysis) em Python (apresente o 
+			\textbf{algoritmo} na prova e anexe o cÛdigo em Python no arquivo zip).
+			
+			Abaixo o trecho onde o algoritmo efetivamente foi implementado. O cÛdigo completo est· em \textbf{source/ela.py}.
+			
+			\begin{lstlisting}[basicstyle=\ttfamily]
+			import os
+			from PIL import Image, ImageChops, ImageEnhance
+			from time import gmtime, strftime
+			
+			# you can change the image directory here
+			HOAX_IMAGES = './HoaxImages/'
+			
+			def check_image(img_path, scale=20.0, show=False):
+			""" Compute the Error Level Analysis for the given image
+			
+			Save a copy of the given image changing its quality level,
+			in our case 95%, and compute the difference between this 
+			image over the original. In addition, a scale is also 
+			applied to the final result for better viewing.
+			
+			References: 
+			http://blackhat.com/presentations/bh-dc-08/Krawetz/Whitepaper/bh-dc-08-krawetz-WP.pdf
+			http://www.eecs.berkeley.edu/Pubs/TechRpts/2015/EECS-2015-85.pdf
+			"""
+			try:
+			img = Image.open(img_path)
+			except FileNotFoundError:
+			print ("File '"+ img_path +"' not found.")
+			return
+			
+			# check the image format for JPEG only
+			if img.format is not 'JPEG':
+			log(img_path + ' is not a JPEG file')
+			return
+			
+			log("Image size "+ str(img.size[0]) + "x" + str(img.size[1]))
+			short_file_name = os.path.splitext(img_path)[0]
+			
+			# save a copy of the image with a different inferior quality level
+			resaved_path = short_file_name + '_resaved'
+			img.save(resaved_path, 'JPEG', quality=95)
+			resaved_img = Image.open(resaved_path)
+			
+			# compute the difference between the given image and the image
+			# generated applying a scale to increase the brightness
+			ela_img = ImageChops.difference(img, resaved_img)
+			ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
+			ela_img.save(short_file_name + '_ela.png')
+			if (show):
+			ela_img.show()
+			
+			os.remove(resaved_path)
+			\end{lstlisting}
+			
+			\item Teste seu algoritmo com as imagens que deixei no paca para este exercÌcio. 
+			Quantas imagens seriam consideradas modificadas por esse mÈtodo? Comente o resultado,
+			comparando com a sua intuiÁ„o.
+			
+			Uma vez submetida a imagem ao \textit{Error Level Analysis}, pode-se perceber pelo resultado que 
+			a regi„o manipulada ter· um nÌvel de erro diferente das regiıes n„o manipuladas. Logo, 
+			o nÌvel de erro ir· expor a regi„o manipulada rotulando as regiıes com maior alteraÁ„o apÛs
+			a imagem ser salva com um nÌvel de qualidade inferior \cite{krawetz}.
+			
+			Na Figura 1b, podemos ver o resultado do ELA na imagem dada. As regiıes com maior chance de ter
+			alteraÁıes s„o as que apresentam os pixels com maior brilho, uma vez que a alteraÁ„o da imagem 
+			causa instabilidade nestas ·reas.
+			\begin{figure}[htb]
+				\centering
+				\begin{minipage}[b]{0.45\textwidth}
+					\centering
+					\includegraphics[scale=0.3]{Q3Images/cows_on_beach.jpg} 
+					\centerline{\label{fig1a} \small (1a) Imagem original}
+				\end{minipage}
+				\begin{minipage}[b]{0.45\textwidth}
+					\centering
+					\includegraphics[scale=0.3]{Q3Images/cows_on_beach_ela.png} 
+					\centerline{\label{fig1b} \small (1b) Imagem com o resultado do ELA}
+				\end{minipage}
+			\end{figure}
+			
+			Os resultados foram avaliados de acordo com o brilho das bordas que devem ser semelhantes no resultado 
+			da aplicaÁ„o do ELA na imagem. AlÈm disso, regiıes de cores e texturas semelhantes na imagem
+			original, independentemente da cor, tambÈm devem ter cores aproximadamente similares no ELA \cite{berkeleywebsite}.
+			
+			Isto posto, um total de 23 imagens foram consideradas alteradas de acordo com o mÈtodo e avaliaÁ„o a posteriori.
+		\end{itemize}
+		%
+		%
+		%
+		\item[{\bf Q2.}] Esta quest„o refere-se ‡ transformada de Fourier.
+		\begin{itemize}
+			\item Encontre a transformada de Fourier da funÁ„o:
+			\begin{eqnarray*}
+				f(x) = \left\{ \begin{array}{rl} 
+					7 &\mbox{ if $-5 < x < 5$} \\
+					0 &\mbox{ caso contr·rio}
+				\end{array} \right.
+			\end{eqnarray*}
+			
+			Por definiÁ„o, temos que a transformada de Fourier de um pulso
+			retangular de largura $D$ e altura $A$ tem a forma dada por:
+			
+			\begin{eqnarray*}
+				F(\omega) = ADsinc\bigg(\frac{\omega D}{2}\bigg)  = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}}
+			\end{eqnarray*}
+			
+			A funÁ„o $f(x)$ pode ser representada graficamente como:
+			\begin{figure}[htb]
+				\centering   
+				\begin{minipage}[b]{0.45\textwidth}
+					\centering
+					\includegraphics[scale=0.45]{Q3Images/pulse_function.png} 
+				\end{minipage}
+			\end{figure}
+			
+			Onde:
+			\begin{eqnarray*}
+				f(x) = \left\{ \begin{array}{rl} 
+					A, &\mbox{ $x \in  [\frac{-D}{2}, \frac{D}{2}]$} \\
+					0, &\mbox{ $x \notin [\frac{-D}{2}, \frac{D}{2}]$}
+				\end{array} \right.
+			\end{eqnarray*}
+			
+			Logo, temos que A = 7 e D = 10 e, portanto, a transformada de Fourier da funÁ„o $f(x)$ È:
+			\begin{align*}
+			F(\omega) &= AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \\
+			&= 7*10\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
+			&= 70\frac{sin(\frac{\omega 10}{2})}{\frac{\omega 10}{2}} \\
+			&= 70\frac{sin(5\omega)}{5\omega}
+			\end{align*}
+			
+			%%%
+			\item Encontre a transformada de Fourier da funÁ„o $ g(x) = f(x)\cos
+			\omega_0 x$, sabendo que a transformada de Fourier de $f(x)$ È dada
+			por $F(\omega)$
+			
+			Tomando a propriedade da modulaÁ„o:
+			\begin{align*}
+			\mathcal{F}[x(t)cos(\omega_0t)] = \frac{1}{2}[F(\omega + \omega_0) + F(\omega - \omega_0)]
+			\end{align*}
+			Temos que a transformada de Fourier da funÁ„o $g(x)$ È:
+			\begin{align*}
+			G(\omega) = \frac{1}{2}F(\omega + \omega_0) + \frac{1}{2}F(\omega - \omega_0)
+			\end{align*}
+			
+			%%%
+			\item Ache a inversa da transformada de Fourier de $G(\omega) =
+			20\frac{\sin 5\omega}{5\omega}e^{-3\omega i}$
+			
+			Por ora, ignorando a exponencial complexa de $G(\omega)$, podemos obter os valores de $A$ e $D$:
+			\begin{align*}
+			20\frac{sin(5\omega)}{5\omega} = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}} \\
+			\\ 5\omega = \frac{\omega D}{2} \\
+			10\omega = \omega D \\
+			D = \frac{10\omega}{\omega} = 10 \\
+			\\ AD = 20 \\
+			A10 = 20 \\
+			A = 2
+			\end{align*}
+			
+			Como vimos no primeiro item do exercÌcio 2, sabemos que:
+			\begin{align*}
+			f(x) = A . rect(x) = \left\{ \begin{array}{rl}
+			A, &\mbox{ $x \in  [\frac{-D}{2}, \frac{D}{2}]$} \\
+			0, &\mbox{ $x \notin [\frac{-D}{2}, \frac{D}{2}]$}
+			\end{array} \right.
+			\\ A . rect\bigg(\frac{x}{D}\bigg) \xrightarrow{\mathscr{F}} ADsinc \bigg(\frac{\omega D}{2}\bigg)
+			\end{align*}
+			
+			O que nos d· a forma do pulso retangular:
+			\begin{align*}
+			f(x) = 2 . rect\bigg(\frac{x}{10}\bigg) = \left\{ \begin{array}{rl} 
+			2, &\mbox{ $x \in  [-5, 5]$} \\
+			0, &\mbox{ $x \notin [-5, 5]$}
+			\end{array} \right.
+			\end{align*}
+			
+			\begin{figure}[htb]
+				\centering   
+				\begin{minipage}[b]{0.45\textwidth}
+					\centering
+					\includegraphics[scale=0.45]{Q3Images/pulse_function_2.png} 
+				\end{minipage}
+			\end{figure}
+			
+			Considerando agora a exponencial complexa, sabemos que ela representa um deslocamento no tempo,
+			que È $3$ neste caso e, portanto:
+			\begin{align*}
+			2 . rect\bigg(\frac{x-3}{10}\bigg) \xrightarrow{\mathscr{F}} 20\frac{\sin 5\omega}{5\omega}e^{-3\omega i} \\
+			g(x) = 2 . rect\bigg(\frac{x-3}{10}\bigg) = \left\{ \begin{array}{rl} 
+			2, &\mbox{ $-2 < x < 8$} \\
+			0, &\mbox{ caso contr·rio}
+			\end{array} \right.
+			\end{align*}
+			\begin{figure}[htb]
+				\centering   
+				\begin{minipage}[b]{0.45\textwidth}
+					\centering
+					\includegraphics[scale=0.45]{Q3Images/pulse_function_3.png} 
+				\end{minipage}
+			\end{figure}
+			
+			
+			%%%
+			\item Calcule a DFT do sinal $f = \{1,3,5,3,1\}$
+			
+			A DFT È dada por:
+			\begin{align*}
+			F(k) = \sum\limits_{n=0}^{N-1} f(n) e^{-jk\frac{2\pi}{N}n}
+			\end{align*}
+			
+			Para realizar os c·lculos devemos utilizar a identidade de Euler:
+			\begin{align*}
+			e^{-j \pi} = \cos \pi - j\sin\pi
+			\end{align*}
+			Devemos utilizar a seguinte equaÁ„o para calcular a DFT do sinal dado por $f(x)$:
+			\begin{align*}
+			X[k] = \sum\limits_{n=0}^{N-1} x[n] e^{-jk\frac{2\pi}{N}n},\qquad para\quad k=0,1,2,...,N-1
+			\end{align*}
+			Temos que N=5, logo:
+			\begin{align*}
+			&X[0] = (1e^0 + 3e^0 + 5e^0 + 3e^0 + 1e^0) &\\
+			&X[1] = (1e^0 + 3e^{-j1\frac{2\pi}{5}1} + 5e^{-j1\frac{2\pi}{5}2} + 3e^{-j1\frac{2\pi}{5}3} + 1e^{-j1\frac{2\pi}{5}4)} &\\
+			&X[2] = (1e^0 + 3e^{-j2\frac{2\pi}{5}1} + 5e^{-j2\frac{2\pi}{5}2} + 3e^{-j2\frac{2\pi}{5}3} + 1e^{-j2\frac{2\pi}{5}4)} &\\
+			&X[3] = (1e^0 + 3e^{-j3\frac{2\pi}{5}1} + 5e^{-j3\frac{2\pi}{5}2} + 3e^{-j3\frac{2\pi}{5}3} + 1e^{-j3\frac{2\pi}{5}4)} &\\
+			&X[4] = (1e^0 + 3e^{-j4\frac{2\pi}{5}1} + 5e^{-j4\frac{2\pi}{5}2} + 3e^{-j4\frac{2\pi}{5}3} + 1e^{-j4\frac{2\pi}{5}4)} &\\
+			&X[0] = (1 + 3 + 5 + 3 + 1) &\\
+			&X[1] = (1 + 3e^{-j\frac{2\pi}{5}} + 5e^{-j\frac{4\pi}{5}}  + 3e^{-j\frac{6\pi}{5}}  + 1e^{-j\frac{8\pi}{5})} &\\
+			&X[2] = (1 + 3e^{-j\frac{4\pi}{5}} + 5e^{-j\frac{6\pi}{5}}  + 3e^{-j\frac{12\pi}{5}} + 1e^{-j\frac{16\pi}{5})} &\\
+			&X[3] = (1 + 3e^{-j\frac{6\pi}{5}} + 5e^{-j\frac{12\pi}{5}} + 3e^{-j\frac{18\pi}{5}} + 1e^{-j\frac{24\pi}{5})} &\\
+			&X[4] = (1 + 3e^{-j\frac{8\pi}{5}} + 5e^{-j\frac{16\pi}{5}} + 3e^{-j\frac{24\pi}{5}} + 1e^{-j\frac{32\pi}{5})}&
+			\end{align*}
+			Calculando cada componente com a relaÁ„o de Euler e substituindo os resultados na equaÁ„o acima:
+			\begin{align*}
+			&e^{-j\frac{2\pi}{5}} = cos(\frac{2\pi}{5}) - jsen(\frac{2\pi}{5}) = 0,30902  - 0,95106j &\\
+			&e^{-j\frac{4\pi}{5}} = cos(\frac{4\pi}{5}) - jsen(\frac{4\pi}{5}) = -0,80902 - 0,58779j &\\
+			&e^{-j\frac{6\pi}{5}} = cos(\frac{6\pi}{5}) - jsen(\frac{6\pi}{5}) = -0,80902 + 0,58779j &\\
+			&e^{-j\frac{8\pi}{5}} = cos(\frac{8\pi}{5}) - jsen(\frac{8\pi}{5}) = 0,30902  - 0,95106j &\\
+			&e^{-j\frac{12\pi}{5}} = cos(\frac{12\pi}{5}) - jsen(\frac{12\pi}{5}) = 0,30902	-0,95106j &\\
+			&e^{-j\frac{16\pi}{5}} = cos(\frac{16\pi}{5}) - jsen(\frac{16\pi}{5}) = -0,80902 + 0,58779j &\\
+			&e^{-j\frac{18\pi}{5}} = cos(\frac{18\pi}{5}) - jsen(\frac{18\pi}{5}) = 0,30902 + 0,95106j &\\
+			&e^{-j\frac{24\pi}{5}} = cos(\frac{24\pi}{5}) - jsen(\frac{24\pi}{5}) = -0,80902 - 0,58779j &\\
+			&e^{-j\frac{32\pi}{5}} = cos(\frac{32\pi}{5}) - jsen(\frac{32\pi}{5}) = 0,30902	- 0,95106j&
+			\end{align*}
+			Temos ent„o que o resultado da DFT È:
+			\begin{multline*}
+			X[f] = 13, -4.236067-3.077683j, 0.236067+0.726542j, \\
+			0.236067-0.726542j, -4.236067+3.077683j
+			\end{multline*}
+			
+		\end{itemize}
+		%
+		%
+		%
+		\item[{\bf Q3.}] 
+		\begin{itemize}
+			\item Calcule (apresente os c·lculos) dos descritores de Fourier das
+			figuras 3a e 3b. Lembre-se que os pontos da
+			borda do quadrado ser„o representados por pontos no plano de
+			Argand-Gauss. Isto È, cada ponto no plano passa a ser um n˙mero
+			complexo e a borda passa a ser um vetor de pontos complexos, como
+			num sinal, mas com valores complexos.
+			
+			\textbf{TODO}
+			
+			\item Para confirmar que seus c·lculos est„o corretos, implemente um
+			programa em Python que receba como entrada um vetor de n˙meros
+			complexos (que s„o as coordenadas das bordas) e retorne os
+			descritores de Fourier do vetor de entrada. VocÍ pode usar as
+			funÁıes fornecidas pela biblioteca NUMPY para facilitar a
+			programaÁ„o.
+			
+			\textbf{TODO}
+			
+			\item Para reconstruir a curva, faÁa uma funÁ„o que receba um vetor
+			com os descritores de Fourier, um n˙mero $N$ de descritores a serem
+			usados e grafique os pontos num plano cartesiano (para fazer a mesma 
+			figura que fizemos nos slides das aulas 15 e 16.
+			
+			\textbf{TODO}
+			
+		\end{itemize}
+		\begin{figure}[htb]
+			\centering
+			\begin{minipage}[b]{0.45\textwidth}
+				\centering
+				\includegraphics[scale=0.2]{Q3Images/square1.jpg} 
+				\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
+			\end{minipage}
+			\begin{minipage}[b]{0.45\textwidth}
+				\centering
+				\includegraphics[scale=0.3]{Q3Images/square3.jpg} 
+				\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
+			\end{minipage}
+		\end{figure}
+		
+		%
+		%
+		%
+		\item[{\bf Q4.}] \textbf{Apenas para os alunos de pÛs-graduaÁ„o} 
+		\begin{itemize}
+			\item Leia o artigo do Torre e do Poggio
+			\url{ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-768.pdf}
+			e faÁa um resumo de acordo com as indicaÁıes que deixei no
+			paca (artigos sobre como fazer um resumo). 
+			\item O que È um problema mal-posto?
+			\item O que È regularizaÁ„o? 
+			\item Qual a import‚ncia do teorema apresentado no artigo?
+			\item O que s„o filtros de banda limitada? Qual a sua import‚ncia no
+			artigo?
+			\item Quais s„o os mÈtodos de encontrar borda apresentados no artigo?
+		\end{itemize}
+	\end{itemize}
+	
+	\printbibliography
 \end{document}
