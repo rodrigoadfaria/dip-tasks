@@ -5,7 +5,7 @@ from time import gmtime, strftime
 # you can change the image directory here
 HOAX_IMAGES = './HoaxImages/'
 
-def check_image(img_path, scale=20.0, show=False):
+def check_image(img_path, scale=20.0):
     """ Compute the Error Level Analysis for the given image
     
     Save a copy of the given image changing its quality level,
@@ -40,11 +40,11 @@ def check_image(img_path, scale=20.0, show=False):
     # generated applying a scale to increase the brightness
     ela_img = ImageChops.difference(img, resaved_img)
     ela_img = ImageEnhance.Brightness(ela_img).enhance(scale)
-    ela_img.save(short_file_name + '_ela.png')
-    if (show):
-        ela_img.show()
+    ela_img.save(short_file_name + '_ela.jpg', 'JPEG', quality=100)
     
     os.remove(resaved_path)
+    
+    return ela_img
 
 def process_images(path):
     images = os.listdir(path)
@@ -68,7 +68,8 @@ option = get_menu()
 while option != '3':
     if option == '1':
         img_path = input("Give me the image path from here (e.g. ./imgs/data/original.jpg)\n")
-        check_image(img_path, show=True)
+        ela_img = check_image(img_path)
+        ela_img.show()
     elif option == '2':
         process_images(HOAX_IMAGES)
     else:
