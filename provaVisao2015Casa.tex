@@ -175,7 +175,7 @@ f(x) = \left\{ \begin{array}{rl}
 \end{eqnarray*}
 
 Por definição, temos que a transformada de Fourier de um pulso
-retangular de largura $D$ e altura $A$ tem a forma dada por:
+retangular de duração $D$ e altura $A$ tem a forma dada por:
 
 \begin{eqnarray*}
     F(\omega) = ADsinc\bigg(\frac{\omega D}{2}\bigg)  = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}}
@@ -235,13 +235,17 @@ Por ora, ignorando a exponencial complexa de $G(\omega)$, podemos obter os valor
     A = 2
 \end{align*}
 
-Como vimos no primeiro item do exercício 2, sabemos que:
+Tomando a representação da função $f(x)$ do pulso retangular de duração $D$ e amplitude $A$:
 \begin{align*}
 f(x) = A . rect(x) = \left\{ \begin{array}{rl}
  A, &\mbox{ $x \in  [\frac{-D}{2}, \frac{D}{2}]$} \\
  0, &\mbox{ $x \notin [\frac{-D}{2}, \frac{D}{2}]$}
        \end{array} \right.
-\\ A . rect\bigg(\frac{x}{D}\bigg) \xrightarrow{\mathscr{F}} ADsinc \bigg(\frac{\omega D}{2}\bigg)
+\end{align*}
+
+Vimos no primeiro item do exercício 2 que:
+\begin{align*}
+ A . rect\bigg(\frac{x}{D}\bigg) \xrightarrow{\mathscr{F}} ADsinc \bigg(\frac{\omega D}{2}\bigg)
 \end{align*}
 
 O que nos dá a forma do pulso retangular:
@@ -321,7 +325,7 @@ Calculando cada componente com a relação de Euler e substituindo os resultados
 \end{align*}
 Temos então que o resultado da DFT é:
 \begin{multline*}
-    X[f] = 13, -4.236067-3.077683j, 0.236067+0.726542j, \\
+    X[x] = 13, -4.236067-3.077683j, 0.236067+0.726542j, \\
            0.236067-0.726542j, -4.236067+3.077683j
 \end{multline*}
 
