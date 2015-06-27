@@ -1,1 +1,1 @@
-zip -9 -r --exclude=*.git* --exclude=*documents*  --exclude=*HoaxImages* prova_visao_pdi.zip .
+zip -9 -r --exclude=*.git* --exclude=*documents*  --exclude=*HoaxImages* provaVisao2015Casa_rodrigo_faria.zip .
