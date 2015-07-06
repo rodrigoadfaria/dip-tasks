@@ -269,7 +269,7 @@ que é $3$ neste caso e, portanto:
 \begin{align*}
     2 . rect\bigg(\frac{x-3}{10}\bigg) \xrightarrow{\mathscr{F}} 20\frac{\sin 5\omega}{5\omega}e^{-3\omega i} \\
     g(x) = 2 . rect\bigg(\frac{x-3}{10}\bigg) = \left\{ \begin{array}{rl} 
-     2, &\mbox{ $-2 < x < 8$} \\
+     2, &\mbox{ $-8 < x < 2$} \\
      0, &\mbox{ caso contrário}
            \end{array} \right.
 \end{align*}
@@ -285,48 +285,46 @@ que é $3$ neste caso e, portanto:
 %%%
 \item Calcule a DFT do sinal $f = \{1,3,5,3,1\}$
 
-A DFT é dada por:
+A Transformada Discreta de Fourier (DFT) provém da Série Discreta de Fourier (DFS) e é dada por \cite{broughton2009discrete}:
 \begin{align*}
-    F(k) = \sum\limits_{n=0}^{N-1} f(n) e^{-jk\frac{2\pi}{N}n}
+    X_k = \sum\limits_{m=0}^{N-1} x_m e^{\frac{-2\pi ikm}{N}},\qquad para\quad k=0,1,2,...,N-1
 \end{align*}
 
 Para realizar os cálculos devemos utilizar a identidade de Euler:
 \begin{align*}
-    e^{-j \pi} = \cos \pi - j\sin\pi
+    e^{-i \pi} = \cos \pi - i\sin\pi
 \end{align*}
-Devemos utilizar a seguinte equação para calcular a DFT do sinal dado por $f(x)$:
+
+Temos que N=5, ou seja, o tamanho do vetor do sinal dado por $f$, logo:
 \begin{align*}
-    X[k] = \sum\limits_{n=0}^{N-1} x[n] e^{-jk\frac{2\pi}{N}n},\qquad para\quad k=0,1,2,...,N-1
+    &X_0 = (1e^0 + 3e^0 + 5e^0 + 3e^0 + 1e^0) &\\
+    &X_1 = (1e^0 + 3e^{\frac{-2\pi i1}{5}} + 5e^{\frac{-2\pi i2}{5}} + 3e^{\frac{-2\pi i3}{5}} + 1e^{\frac{-2\pi i4}{5})} &\\
+    &X_2 = (1e^0 + 3e^{\frac{-2\pi i2}{5}} + 5e^{\frac{-2\pi i4}{5}} + 3e^{\frac{-2\pi i6}{5}} + 1e^{\frac{-2\pi i8}{5})} &\\
+    &X_3 = (1e^0 + 3e^{\frac{-2\pi i3}{5}} + 5e^{\frac{-2\pi i6}{5}} + 3e^{\frac{-2\pi i9}{5}} + 1e^{\frac{-2\pi i12}{5})} &\\
+    &X_4 = (1e^0 + 3e^{\frac{-2\pi i4}{5}} + 5e^{\frac{-2\pi i8}{5}} + 3e^{\frac{-2\pi i12}{5}} + 1e^{\frac{-2\pi i16}{5})} &\\
+    \\&X_0 = (1 + 3 + 5 + 3 + 1) &\\
+    &X_1 = (1 + 3e^{\frac{-2\pi i}{5}} + 5e^{\frac{-4\pi i}{5}}  + 3e^{\frac{-6\pi i}{5}}  + 1e^{\frac{-8\pi i}{5})} &\\
+    &X_2 = (1 + 3e^{\frac{-4\pi i}{5}} + 5e^{\frac{-8\pi i}{5}}  + 3e^{\frac{-12\pi i}{5}} + 1e^{\frac{-16\pi i}{5})} &\\
+    &X_3 = (1 + 3e^{\frac{-6\pi i}{5}} + 5e^{\frac{-12\pi i}{5}} + 3e^{\frac{-18\pi i}{5}} + 1e^{\frac{-24\pi i}{5})} &\\
+    &X_4 = (1 + 3e^{\frac{-8\pi i}{5}} + 5e^{\frac{-16\pi i}{5}} + 3e^{\frac{-24\pi i}{5}} + 1e^{\frac{-32\pi i}{5})}&
 \end{align*}
-Temos que N=5, logo:
+Calculando cada exponencial complexa com a relação de Euler e substituindo os resultados na equação acima:
 \begin{align*}
-    &X[0] = (1e^0 + 3e^0 + 5e^0 + 3e^0 + 1e^0) &\\
-    &X[1] = (1e^0 + 3e^{-j1\frac{2\pi}{5}1} + 5e^{-j1\frac{2\pi}{5}2} + 3e^{-j1\frac{2\pi}{5}3} + 1e^{-j1\frac{2\pi}{5}4)} &\\
-    &X[2] = (1e^0 + 3e^{-j2\frac{2\pi}{5}1} + 5e^{-j2\frac{2\pi}{5}2} + 3e^{-j2\frac{2\pi}{5}3} + 1e^{-j2\frac{2\pi}{5}4)} &\\
-    &X[3] = (1e^0 + 3e^{-j3\frac{2\pi}{5}1} + 5e^{-j3\frac{2\pi}{5}2} + 3e^{-j3\frac{2\pi}{5}3} + 1e^{-j3\frac{2\pi}{5}4)} &\\
-    &X[4] = (1e^0 + 3e^{-j4\frac{2\pi}{5}1} + 5e^{-j4\frac{2\pi}{5}2} + 3e^{-j4\frac{2\pi}{5}3} + 1e^{-j4\frac{2\pi}{5}4)} &\\
-    &X[0] = (1 + 3 + 5 + 3 + 1) &\\
-    &X[1] = (1 + 3e^{-j\frac{2\pi}{5}} + 5e^{-j\frac{4\pi}{5}}  + 3e^{-j\frac{6\pi}{5}}  + 1e^{-j\frac{8\pi}{5})} &\\
-    &X[2] = (1 + 3e^{-j\frac{4\pi}{5}} + 5e^{-j\frac{6\pi}{5}}  + 3e^{-j\frac{12\pi}{5}} + 1e^{-j\frac{16\pi}{5})} &\\
-    &X[3] = (1 + 3e^{-j\frac{6\pi}{5}} + 5e^{-j\frac{12\pi}{5}} + 3e^{-j\frac{18\pi}{5}} + 1e^{-j\frac{24\pi}{5})} &\\
-    &X[4] = (1 + 3e^{-j\frac{8\pi}{5}} + 5e^{-j\frac{16\pi}{5}} + 3e^{-j\frac{24\pi}{5}} + 1e^{-j\frac{32\pi}{5})}&
+    &e^{\frac{-2\pi i}{5}} = cos(\frac{2\pi}{5}) - isen(\frac{2\pi}{5}) = 0.30902  - 0.95106i &\\
+    &e^{\frac{-4\pi i}{5}} = cos(\frac{4\pi}{5}) - isen(\frac{4\pi}{5}) = -0.80902 - 0.58779i &\\
+    &e^{\frac{-6\pi i}{5}} = cos(\frac{6\pi}{5}) - isen(\frac{6\pi}{5}) = -0.80902 + 0.58779i &\\
+    &e^{\frac{-8\pi i}{5}} = cos(\frac{8\pi}{5}) - isen(\frac{8\pi}{5}) = 0.30902  - 0.95106i &\\
+    &e^{\frac{-12\pi i}{5}} = cos(\frac{12\pi}{5}) - isen(\frac{12\pi}{5}) = 0.30902	-0.95106i &\\
+    &e^{\frac{-16\pi i}{5}} = cos(\frac{16\pi}{5}) - isen(\frac{16\pi}{5}) = -0.80902 + 0.58779i &\\
+    &e^{\frac{-18\pi i}{5}} = cos(\frac{18\pi}{5}) - isen(\frac{18\pi}{5}) = 0.30902 + 0.95106i &\\
+    &e^{\frac{-24\pi i}{5}} = cos(\frac{24\pi}{5}) - isen(\frac{24\pi}{5}) = -0.80902 - 0.58779i &\\
+    &e^{\frac{-32\pi i}{5}} = cos(\frac{32\pi}{5}) - isen(\frac{32\pi}{5}) = 0.30902	- 0.95106i&
 \end{align*}
-Calculando cada componente com a relação de Euler e substituindo os resultados na equação acima:
-\begin{align*}
-    &e^{-j\frac{2\pi}{5}} = cos(\frac{2\pi}{5}) - jsen(\frac{2\pi}{5}) = 0,30902  - 0,95106j &\\
-    &e^{-j\frac{4\pi}{5}} = cos(\frac{4\pi}{5}) - jsen(\frac{4\pi}{5}) = -0,80902 - 0,58779j &\\
-    &e^{-j\frac{6\pi}{5}} = cos(\frac{6\pi}{5}) - jsen(\frac{6\pi}{5}) = -0,80902 + 0,58779j &\\
-    &e^{-j\frac{8\pi}{5}} = cos(\frac{8\pi}{5}) - jsen(\frac{8\pi}{5}) = 0,30902  - 0,95106j &\\
-    &e^{-j\frac{12\pi}{5}} = cos(\frac{12\pi}{5}) - jsen(\frac{12\pi}{5}) = 0,30902	-0,95106j &\\
-    &e^{-j\frac{16\pi}{5}} = cos(\frac{16\pi}{5}) - jsen(\frac{16\pi}{5}) = -0,80902 + 0,58779j &\\
-    &e^{-j\frac{18\pi}{5}} = cos(\frac{18\pi}{5}) - jsen(\frac{18\pi}{5}) = 0,30902 + 0,95106j &\\
-    &e^{-j\frac{24\pi}{5}} = cos(\frac{24\pi}{5}) - jsen(\frac{24\pi}{5}) = -0,80902 - 0,58779j &\\
-    &e^{-j\frac{32\pi}{5}} = cos(\frac{32\pi}{5}) - jsen(\frac{32\pi}{5}) = 0,30902	- 0,95106j&
-\end{align*}
+
 Temos então que o resultado da DFT é:
 \begin{multline*}
-    X[x] = 13, -4.236067-3.077683j, 0.236067+0.726542j, \\
-           0.236067-0.726542j, -4.236067+3.077683j
+    X[x] = 13.0, -4.236067-3.077683i, 0.236067+0.726542i, \\
+           0.236067-0.726542i, -4.236067+3.077683i
 \end{multline*}
 
 \end{itemize}
@@ -342,8 +340,130 @@ Temos então que o resultado da DFT é:
   complexo e a borda passa a ser um vetor de pontos complexos, como
   num sinal, mas com valores complexos.
 
-\textbf{TODO}
+    \begin{figure}[htb]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+    	\centering
+            \includegraphics[scale=0.2]{Q3Images/square1.jpg} 
+    	\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
+    \end{minipage}
+    \begin{minipage}[b]{0.45\textwidth}
+    	\centering
+            \includegraphics[scale=0.3]{Q3Images/square3.jpg} 
+    	\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
+    \end{minipage}
+    \end{figure}
 
+\textbf{Resultados para a primeira imagem}
+
+Para que possamos calcular os descritores de Fourier, devemos representar as coordenadas do quadrado (1,1), (-1,1), (-1,-1) e (1,-1), como 
+coordenadas no plano de Argand-Gauss que, neste caso, são: (1 + i, -1 + i, -1 - i, 1 - i).
+
+Os descritores de Fourier podem ser calculados a partir da DFT \cite{broughton2009discrete}:
+\begin{align*}
+    X_k = \sum\limits_{m=0}^{N-1} x_m e^{\frac{-2\pi ikm}{N}},\qquad para\quad k=0,1,2,...,N-1
+\end{align*}
+
+Da mesma forma que no item anterior, para realizar os cálculos devemos utilizar a identidade de Euler:
+\begin{align*}
+    e^{-i \pi} = \cos \pi - i\sin\pi
+\end{align*}
+	  
+Temos que N=4, ou seja, o número de pontos no plano de Argand-Gauss, logo:
+\begin{align*}
+    &X_0 = (1 + i)e^0 + (-1 + i)e^0 + (-1 - i)e^0 + (1 - i)e^0 &\\
+    &X_1 = (1 + i)e^0 + (-1 + i)e^{\frac{-2\pi i1}{4}} + (-1 - i)e^{\frac{-2\pi i2}{4}} + (1 - i)e^{\frac{-2\pi i3}{4}} &\\
+    &X_2 = (1 + i)e^0 + (-1 + i)e^{\frac{-2\pi i2}{4}} + (-1 - i)e^{\frac{-2\pi i4}{4}} + (1 - i)e^{\frac{-2\pi i6}{4}} &\\
+    &X_3 = (1 + i)e^0 + (-1 + i)e^{\frac{-2\pi i3}{4}} + (-1 - i)e^{\frac{-2\pi i6}{4}} + (1 - i)e^{\frac{-2\pi i9}{4}} &\\
+    \\
+    &X_0 = (1 + i) + (-1 + i) + (-1 - i) + (1 - i)) &\\
+    &X_1 = (1 + i) + (-1 + i)e^{\frac{-2\pi i}{4}} + (-1 - i)e^{\frac{-4\pi i}{4}} + (1 - i)e^{\frac{-6\pi i}{4}} &\\
+    &X_2 = (1 + i) + (-1 + i)e^{\frac{-4\pi i}{4}} + (-1 - i)e^{\frac{-8\pi i}{4}} + (1 - i)e^{\frac{-12\pi i}{4}} &\\
+    &X_3 = (1 + i) + (-1 + i)e^{\frac{-6\pi i}{4}} + (-1 - i)e^{\frac{-12\pi i}{4}} + (1 - i)e^{\frac{-18\pi i}{4}} &\\
+\end{align*}
+Calculando cada exponencial complexa com a relação de Euler e substituindo os resultados na equação acima:
+\begin{align*}
+    &e^{\frac{-2\pi i}{4}} = cos(\frac{2\pi}{4}) - isen(\frac{2\pi}{4}) = -i &\\
+    &e^{\frac{-4\pi i}{4}} = cos(\frac{4\pi}{4}) - isen(\frac{4\pi}{4}) = -1 &\\
+    &e^{\frac{-6\pi i}{4}} = cos(\frac{6\pi}{4}) - isen(\frac{6\pi}{4}) = i &\\
+    &e^{\frac{-8\pi i}{4}} = cos(\frac{8\pi}{4}) - isen(\frac{8\pi}{4}) = 1 &\\
+    &e^{\frac{-12\pi i}{4}} = cos(\frac{12\pi}{4}) - isen(\frac{12\pi}{4}) = -1 &\\
+    &e^{\frac{-18\pi i}{4}} = cos(\frac{18\pi}{4}) - isen(\frac{18\pi}{4}) = -i &
+\end{align*}
+Temos então que o resultado dos descritores de Fourier da imagem é:
+\begin{align*}
+    &X_0 = 0 &\\
+    &X_1 = (1 + i) + (-1 + i)*(-i) + (-1 - i)*(-1) + (1 - i)*(i) &\\
+    &X_2 = (1 + i) + (-1 + i)*(-1) + (-1 - i)*(1) + (1 - i)*(-1) &\\
+    &X_3 = (1 + i) + (-1 + i)*(i) + (-1 - i)*(-1) + (1 - i)*(-i) &\\
+    \\
+    &X[x] = 0.0, 4 + 4i, 0.0, 0.0 &
+\end{align*}
+
+\textbf{Resultados para a segunda imagem}
+
+Assim como fizemos no item anterior, devemos calcular as coordenadas da imagem para encontrarmos os descritores de Fourier.
+Sabemos a coordenada x dos pontos inferior e superior do quadrilátero, que é 5 e, também, conhecemos a coordenada do eixo y para os ponto mais à esquerda e à direita que é igual a 4.
+
+Para as demais coordenadas, basta calcular o valor da diagonal do quadrilátero que, neste caso, é a hipotenusa dos dois triângulos retângulos formados ao se dividir o quadrilátero ao meio, cujos lados possuem comprimento 3. 
+    
+Com base no teorema de Pitágoras temos que a hipotenusa c desse triângulo é dado por:
+\begin{align*}
+ c^2 &= a^2 + b^2 \\
+ c^2 &= 3^2 + 3^2 \\
+ c &= \sqrt{18}	     
+\end{align*}
+
+Consequentemente, temos que a diagonal é $d = \sqrt{18} = 4.24264$ e as coordenadas dos pontos são:
+\begin{align*}
+    (5, 4 + \frac{4.24264}{2}), (5 - \frac{4.24264}{2}, 4), (5, 4 - \frac{4.24264}{2}), (5 + \frac{4.24264}{2}, 4) \\
+    (5, 6.12132), (2.87868, 4), (5, 1.87868), (7.12132, 4)
+\end{align*}
+    
+Agora, devemos representar as coordenadas por pontos no Plano de Argand-Gauss, que são: $(5 + 6.12132i, 2.87868 + 4i, 5 + 1.87868i, 7.12132 + 4i)$.
+
+Os descritores de Fourier podem ser calculados a partir da DFT \cite{broughton2009discrete}:
+\begin{align*}
+    X_k = \sum\limits_{m=0}^{N-1} x_m e^{\frac{-2\pi ikm}{N}},\qquad para\quad k=0,1,2,...,N-1
+\end{align*}
+
+Novamente, utilizando a identidade de Euler:
+\begin{align*}
+    e^{-i \pi} = \cos \pi - i\sin\pi
+\end{align*}
+	  
+Temos que N=4, ou seja, o número de pontos no plano de Argand-Gauss, logo:
+\begin{align*}
+    &X_0 = (5 + 6.12132i)e^0 + (2.87868 + 4i)e^0 + (5 + 1.87868i)e^0 + (7.12132 + 4i)e^0 &\\
+    &X_1 = (5 + 6.12132i)e^0 + (2.87868 + 4i)e^{\frac{-2\pi i1}{4}} + (5 + 1.87868i)e^{\frac{-2\pi i2}{4}} + (7.12132 + 4i)e^{\frac{-2\pi i3}{4}} &\\
+    &X_2 = (5 + 6.12132i)e^0 + (2.87868 + 4i)e^{\frac{-2\pi i2}{4}} + (5 + 1.87868i)e^{\frac{-2\pi i4}{4}} + (7.12132 + 4i)e^{\frac{-2\pi i6}{4}} &\\
+    &X_3 = (5 + 6.12132i)e^0 + (2.87868 + 4i)e^{\frac{-2\pi i3}{4}} + (5 + 1.87868i)e^{\frac{-2\pi i6}{4}} + (7.12132 + 4i)e^{\frac{-2\pi i9}{4}} &\\
+    \\
+    &X_0 = (5 + 6.12132i) + (2.87868 + 4i) + (5 + 1.87868i) + (7.12132 + 4i)) &\\
+    &X_1 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-2\pi i}{4}} + (5 + 1.87868i)e^{\frac{-4\pi i}{4}} + (7.12132 + 4i)e^{\frac{-6\pi i}{4}} &\\
+    &X_2 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-4\pi i}{4}} + (5 + 1.87868i)e^{\frac{-8\pi i}{4}} + (7.12132 + 4i)e^{\frac{-12\pi i}{4}} &\\
+    &X_3 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-6\pi i}{4}} + (5 + 1.87868i)e^{\frac{-12\pi i}{4}} + (7.12132 + 4i)e^{\frac{-18\pi i}{4}} &\\
+\end{align*}
+
+Calculando cada exponencial complexa com a relação de Euler e substituindo os resultados na equação acima:
+\begin{align*}
+    &e^{\frac{-2\pi i}{4}} = cos(\frac{2\pi}{4}) - isen(\frac{2\pi}{4}) = -i &\\
+    &e^{\frac{-4\pi i}{4}} = cos(\frac{4\pi}{4}) - isen(\frac{4\pi}{4}) = -1 &\\
+    &e^{\frac{-6\pi i}{4}} = cos(\frac{6\pi}{4}) - isen(\frac{6\pi}{4}) = i &\\
+    &e^{\frac{-8\pi i}{4}} = cos(\frac{8\pi}{4}) - isen(\frac{8\pi}{4}) = 1 &\\
+    &e^{\frac{-12\pi i}{4}} = cos(\frac{12\pi}{4}) - isen(\frac{12\pi}{4}) = -1 &\\
+    &e^{\frac{-18\pi i}{4}} = cos(\frac{18\pi}{4}) - isen(\frac{18\pi}{4}) = -i &
+\end{align*}
+Temos então que o resultado dos descritores de Fourier da imagem é:
+\begin{align*}
+    &X_0 = (5 + 6.12132i) + (2.87868 + 4i) + (5 + 1.87868i) + (7.12132 + 4i) &\\
+    &X_1 = (5 + 6.12132i) + (2.87868 + 4i)*(-i) + (5 + 1.87868i)*(-1) + (7.12132 + 4i)*(i) &\\
+    &X_2 = (5 + 6.12132i) + (2.87868 + 4i)*(-1) + (5 + 1.87868i)*(1) + (7.12132 + 4i)*(-1) &\\
+    &X_3 = (5 + 6.12132i) + (2.87868 + 4i)*(i) + (5 + 1.87868i)(-1) + (7.12132 + 4i)*(-i) &\\
+    \\
+    &X[x] = 20.0 + 16i,  8.428528i, 0.0, 0.0&
+\end{align*}
+     
 \item Para confirmar que seus cálculos estão corretos, implemente um
   programa em Python que receba como entrada um vetor de números
   complexos (que são as coordenadas das bordas) e retorne os
@@ -351,7 +471,7 @@ Temos então que o resultado da DFT é:
   funções fornecidas pela biblioteca NUMPY para facilitar a
   programação.
   
-\textbf{TODO}
+O programa está na pasta source sob o nome $fourier\_descriptors.py$.
 
 \item Para reconstruir a curva, faça uma função que receba um vetor
   com os descritores de Fourier, um número $N$ de descritores a serem
@@ -361,20 +481,6 @@ figura que fizemos nos slides das aulas 15 e 16.
 \textbf{TODO}
 
 \end{itemize}
-\begin{figure}[htb]
-\centering
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.2]{Q3Images/square1.jpg} 
-	\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
-\end{minipage}
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.3]{Q3Images/square3.jpg} 
-	\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
-\end{minipage}
-\end{figure}
-
 %
 %
 %
