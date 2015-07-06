@@ -13,7 +13,7 @@ Não é demasiado lembrar que processos judiciais já são interpretados com aju
 \\[6pt]
 Sendo assim, a motivação principal do trabalho proposto é de criar uma ferramenta capaz de avaliar uma dada imagem, de forma que qualquer pessoa comum, entenda-se por aquela que não tem conhecimento específico na área de processamento de imagens, possa identificar potenciais alterações, sem a necessidade de auxílio de um analista forense, por exemplo.
 \\[6pt]
-Tal ferramenta deve ser uma plataforma web, disponível em larga escala, sendo que uma das principais técnicas abordadas pelos autores para compor a paleta de ferramentas do serviço é o Error Level Analysis (ELA).
+Tal ferramenta deve ser uma plataforma web, disponível em larga escala, sendo que uma das principais técnicas abordadas pelos autores para compor a paleta de funcionalidades do serviço é o Error Level Analysis (ELA).
 \\[6pt]
 É sabido que imagens JPEG perdem informação durante a compactação e uma certa quantidade de erro é introduzida cada vez que uma imagem JPEG é comprimida / salva novamente \cite{krawetz}. Logo, cada pixel contém um certo nível de erro, e a execução de uma nova compressão irá alterar o nível de erro do mesmo. No entanto, se uma imagem é manipulada, é muito provável que as diferentes partes da imagem terão diferentes níveis de erro, e o ELA é uma técnica que se concentra neste artefato para identificar se uma imagem foi manipulada e encontrar regiões adulteradas \cite{krawetz}.
 \\[6pt]
@@ -31,7 +31,7 @@ Em seguida, esta máscara é multiplicada em cada um dos três canais diferentes
 \\[6pt]
 Outras técnicas também foram apresentadas, com o intuito de integração na plataforma web que está sob desenvolvimento pela equipe em questão. Considerando o processo de codificação de uma imagem, deu-se foco na etapa de quantização, já que nesta etapa, o processo de codificação pode deixar rastros que permitem descobrir se uma imagem foi manipulada ou não. Uma delas é o \textit{blocking artifact measurement} e a outra é o próprio ELA, com um realce no aspecto visual, no intuito de melhorar a experiência proporcionada pelo método original.
 \\[6pt]
-Uma outra técnica citada foi a análise de metadados, que consiste em avaliar algumas informações tais como, a ferramenta que foi utilizada para criar a imagem e, no caso de uma possível alteração, a ferramenta que alterou a imagem que ficam gravadas no arquivo. Quando da alteração por um \textit{smartphone}, o sistema operacional também fica armazenado. Outra informação importante é data de criação e/ou alteração da imagem. Apesar de serem características que podem ser um indicativo de que a imagem foi alterada, nada garante que terceiros tentem burlar, também, o conteúdo relativo ao metadado da imagem.
+Uma outra técnica citada foi a análise de metadados, que consiste em avaliar algumas informações tais como, a ferramenta que foi utilizada para criar a imagem e, no caso de uma possível alteração, a ferramenta que alterou a imagem, que ficam gravadas no arquivo. Quando da alteração por um \textit{smartphone}, o sistema operacional também fica armazenado. Outra informação importante é data de criação e/ou alteração da imagem. Apesar de serem características que podem ser um indicativo de que a imagem foi alterada, nada garante que terceiros tentem burlar, também, o conteúdo relativo ao metadado da imagem.
 \\[6pt]
 \item \textbf{Metodologia}
 
@@ -44,11 +44,11 @@ Apesar do método ter sido citado, não há teoremas detalhados no artigo, apena
 \\[6pt]
 \item \textbf{Conclusão}
 
-Pode-se destacar que a foco principal do artigo é o ELA, onde a contribuição de um dos autores, Yan Zhao, fica mais evidente, tanto que uma seção foi inteiramente dedicada à sua colaboração no trabalho.
+Pode-se destacar que o foco principal do artigo é o ELA, onde a contribuição de um dos autores, Yan Zhao, fica mais evidente, tanto que uma seção foi inteiramente dedicada à sua colaboração no trabalho.
 \\[6pt]
 Dos experimentos realizados, uma imagem foi dada como exemplo para mostrar a técnica com \textit{blocking artifact measurement}. Com o ELA, 3 \textit{datasets} com imagens manipuladas foram utilizados: \textit{CASIA2 Tampered Image Detection Evaluation Database} que consiste de 7491 imagens autênticas e 5123 adulteradas, o segundo \textit{Columbia Uncompressed Image Splicing Detection Evaluation Dataset} formado por 180 imagens remontadas, fruto de cópia de um recorte da própria imagem ou de uma outra fonte, transposta para outra região e 180 imagens originais e o terceiro é o \textit{Benchmark Dataset} composto, também, por imagens de alta qualidade com regiões adulteradas por cópia e cola.
 \\[6pt]
-O resultado do método ELA original proposto por Krawetz \cite{krawetz} foi exibido e, posteriormente, a aplicação do novo método proposto com filtros gaussianos mostram resultados significativos.
+O resultado do método ELA original elaborado por Krawetz \cite{krawetz} foi exibido e, posteriormente, a aplicação do novo método proposto com filtros gaussianos mostram resultados significativos.
 \\[6pt]
 Além do aspecto visual, Yan Zhao também criou um classificador capaz de decidir se uma imagem foi modificada ou não. A extração dos atributos foi feita com dados numéricos do ELA como a média, a mediana e a variância nos três canais da imagem resultante do ELA. O classificador foi criado com \textit{support vector machine} e \textit{adaptive boosting}, ambos do pacote \textit{Scikitlearn}.
 \\[6pt]
@@ -62,7 +62,7 @@ A segunda empresa é chamada de Verifeyed e está localizada na República Checa
 \\[6pt]
 Ambas têm um posicionamento de mercado diferente do proposto pelos autores.
 \\[6pt]
-Em suma, o plano de negócios citado tem características de inovação, tanto do ponto de vista mercadológico quanto do científico, já que os autores se preocuparam em melhorar técnicas já existentes com o objetivo de ter um diferencial competitivo.
+Em suma, o plano de negócios citado tem características de inovação, tanto do ponto de vista mercadológico quanto do tecnológico, já que os autores se preocuparam em melhorar técnicas já existentes com o objetivo de ter um diferencial competitivo.
 \\[6pt]
 Logo, as práticas já existentes na área podem ser impactadas com as mudanças indicadas, principalmente, pelo fato da plataforma web ser interativa e capaz de dar resultados mais analíticos do que as demais avaliadas como \textit{benchmark}.
 \\[6pt]
@@ -70,31 +70,31 @@ Os resultados obtidos não são de todo genéricos, já que é possível, ainda 
 \\[6pt]
 Como trabalho futuro, o autor cita que novas ferramentas para auxiliar os usuários a obter uma melhor interpretação do resultado do ELA devem ser criadas e, também, extrair outros dados numéricos que possam ser incluídos como atributos de entrada para os classificadores.
 \end{enumerate}
-    
+\\[6pt]
   \item \textbf{Crítica}
     \begin{enumerate}[label*=\arabic*.]
       \item \textbf{Capacidade de inovação}
-      
+\\[6pt]      
 Com exceção do método composto pelo ELA com filtro gaussiano, todos os demais são apenas repetições do estado da arte em análise de imagens.
 \\[6pt]
-Não há nenhuma preocupação em relação a comparação dos métodos, já que eles estão sendo utilizados como experimentos para compor as técnicas que estarão disponíveis na plataforma web posteriormente. Isso fica ainda mais evidente na seção \textit{Intellectual Property}, onde os autores chegam à conclusão de que não é possível registrar patente da plataforma web já que ela não atende a dois requisitos das leis dos Estados Unidos para tal, que são:
+Não há preocupação em relação a comparação dos métodos com outros existentes, já que eles estão sendo utilizados como experimentos para compor as técnicas que estarão disponíveis na plataforma web posteriormente. Isso fica ainda mais evidente na seção \textit{Intellectual Property}, onde os autores chegam à conclusão de que não é possível registrar patente da plataforma web já que ela não atende a dois requisitos das leis dos Estados Unidos para tal, que são:
 \\[6pt]
 1. A reprodução não pode ser óbvia, o que não ocorre, já que os próprios autores têm receio de serem copiados, uma vez que eles utilizam uma combinação de técnicas que estão disponíveis em outros artigos que estão publicados abertamente.
 \\[6pt]
-2. Inovação que, pelas mesmas leis, a invenção reivindicada deve ter antes de ser patenteada, descrita em uma publicação impressa, ou em uso público, em promoção, ou de outro modo disponível para o público, o que também não ocorre neste caso e, por consequência, dificulta o processo de obtenção de patente.
+2. Inovação que, pelas mesmas leis, a invenção reivindicada deve ter sido antes de ser patenteada, descrita em uma publicação impressa, ou em uso público, em promoção, ou de outro modo disponível para o público, o que também não ocorre neste caso e, por consequência, dificulta o processo de obtenção de patente.
 \\[6pt]
 \item \textbf{Ausência de embasamento teórico}
 
-Nenhum algoritmo foi mostrado, poucos conceitos matemáticos, nenhuma prova, o que não garante que o método é totalmente funcional. É difícil até mesmo avaliar qualquer tipo de erro conceitual, uma vez que maiores detalhes não foram fornecidos, acredito que de forma propositada, para evitar que detalhes do método fossem publicados inadvertidamente, oferecendo perigo ao negócio como um todo.
+Nenhum algoritmo foi mostrado, poucos conceitos matemáticos, nenhuma prova, o que não garante que o método é totalmente funcional. É difícil até mesmo avaliar qualquer tipo de erro conceitual, uma vez que maiores detalhes não foram fornecidos, acredito que de forma propositada, para evitar que detalhes do método fossem publicados inadvertidamente, oferecendo risco ao negócio como um todo.
 \\[6pt]
 Outro ponto já observado, o experimento com o \textit{dataset} \textit{Benchmark Dataset} não foi bem sucedido, conforme citado pelos autores, mas nenhuma métrica ou medida de erro foi detalhada.
-
-    \end{enumerate}
-  \item Síntese
+\end{enumerate}
+\\[6pt]
+  \item \textbf{Sugestões}
     \begin{enumerate}[label*=\arabic*.]
 \item \textbf{Mudança de paradigma para \textit{open source}}
 
-Uma possível mudança de paradigma seria abrir o código para a comunidade de científica para obter sugestões e possíveis novas funcionalidades para a plataforma, de forma que não fique limitada a métodos já existentes ou que possam ser facilmente copiados. Com isso, as técnicas apresentadas podem ser mais bem elaboradas e expostas, sem qualquer tipo de problema em relação a segredo industrial ou patente envolvida.
+Uma possível mudança de paradigma seria abrir o código para a comunidade científica para obter sugestões, críticas, elogios e possíveis novas funcionalidades para a plataforma, de forma que não fique limitada a métodos já existentes ou que possam ser facilmente copiados. Com isso, as técnicas apresentadas podem ser mais bem elaboradas e expostas, sem qualquer tipo de problema em relação a segredo industrial ou patente envolvida.
 \\[6pt]
 Com este mesmo viés, a contribuição de outros grupos de pesquisa podem incluir embasamento teórico e fundamentado para este e novos métodos propostos.
     \end{enumerate}
