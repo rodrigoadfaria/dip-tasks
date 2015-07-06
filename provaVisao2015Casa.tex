@@ -269,7 +269,7 @@ que é $3$ neste caso e, portanto:
 \begin{align*}
     2 . rect\bigg(\frac{x-3}{10}\bigg) \xrightarrow{\mathscr{F}} 20\frac{\sin 5\omega}{5\omega}e^{-3\omega i} \\
     g(x) = 2 . rect\bigg(\frac{x-3}{10}\bigg) = \left\{ \begin{array}{rl} 
-     2, &\mbox{ $-8 < x < 2$} \\
+     2, &\mbox{ $-2 < x < 8$} \\
      0, &\mbox{ caso contrário}
            \end{array} \right.
 \end{align*}
@@ -379,8 +379,9 @@ Temos que N=4, ou seja, o número de pontos no plano de Argand-Gauss, logo:
     &X_0 = (1 + i) + (-1 + i) + (-1 - i) + (1 - i)) &\\
     &X_1 = (1 + i) + (-1 + i)e^{\frac{-2\pi i}{4}} + (-1 - i)e^{\frac{-4\pi i}{4}} + (1 - i)e^{\frac{-6\pi i}{4}} &\\
     &X_2 = (1 + i) + (-1 + i)e^{\frac{-4\pi i}{4}} + (-1 - i)e^{\frac{-8\pi i}{4}} + (1 - i)e^{\frac{-12\pi i}{4}} &\\
-    &X_3 = (1 + i) + (-1 + i)e^{\frac{-6\pi i}{4}} + (-1 - i)e^{\frac{-12\pi i}{4}} + (1 - i)e^{\frac{-18\pi i}{4}} &\\
+    &X_3 = (1 + i) + (-1 + i)e^{\frac{-6\pi i}{4}} + (-1 - i)e^{\frac{-12\pi i}{4}} + (1 - i)e^{\frac{-18\pi i}{4}} &
 \end{align*}
+
 Calculando cada exponencial complexa com a relação de Euler e substituindo os resultados na equação acima:
 \begin{align*}
     &e^{\frac{-2\pi i}{4}} = cos(\frac{2\pi}{4}) - isen(\frac{2\pi}{4}) = -i &\\
@@ -414,13 +415,16 @@ Com base no teorema de Pitágoras temos que a hipotenusa c desse triângulo é d
  c &= \sqrt{18}	     
 \end{align*}
 
-Consequentemente, temos que a diagonal é $d = \sqrt{18} = 4.24264$ e as coordenadas dos pontos são:
+Consequentemente, temos que a diagonal é $d = \sqrt{18} = 4.24264$ e as coordenadas dos pontos da imagem, que denominei de $f$, são:
 \begin{align*}
-    (5, 4 + \frac{4.24264}{2}), (5 - \frac{4.24264}{2}, 4), (5, 4 - \frac{4.24264}{2}), (5 + \frac{4.24264}{2}, 4) \\
-    (5, 6.12132), (2.87868, 4), (5, 1.87868), (7.12132, 4)
+    f &= (5, 4 + \frac{4.24264}{2}), (5 - \frac{4.24264}{2}, 4), (5, 4 - \frac{4.24264}{2}), (5 + \frac{4.24264}{2}, 4) \\
+    f &= (5, 6.12132), (2.87868, 4), (5, 1.87868), (7.12132, 4)
 \end{align*}
     
-Agora, devemos representar as coordenadas por pontos no Plano de Argand-Gauss, que são: $(5 + 6.12132i, 2.87868 + 4i, 5 + 1.87868i, 7.12132 + 4i)$.
+Agora, devemos representar as coordenadas por pontos no Plano de Argand-Gauss, que são:
+\begin{align*}
+    f &= (5 + 6.12132i, 2.87868 + 4i, 5 + 1.87868i, 7.12132 + 4i)
+\end{align*}
 
 Os descritores de Fourier podem ser calculados a partir da DFT \cite{broughton2009discrete}:
 \begin{align*}
@@ -442,7 +446,7 @@ Temos que N=4, ou seja, o número de pontos no plano de Argand-Gauss, logo:
     &X_0 = (5 + 6.12132i) + (2.87868 + 4i) + (5 + 1.87868i) + (7.12132 + 4i)) &\\
     &X_1 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-2\pi i}{4}} + (5 + 1.87868i)e^{\frac{-4\pi i}{4}} + (7.12132 + 4i)e^{\frac{-6\pi i}{4}} &\\
     &X_2 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-4\pi i}{4}} + (5 + 1.87868i)e^{\frac{-8\pi i}{4}} + (7.12132 + 4i)e^{\frac{-12\pi i}{4}} &\\
-    &X_3 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-6\pi i}{4}} + (5 + 1.87868i)e^{\frac{-12\pi i}{4}} + (7.12132 + 4i)e^{\frac{-18\pi i}{4}} &\\
+    &X_3 = (5 + 6.12132i) + (2.87868 + 4i)e^{\frac{-6\pi i}{4}} + (5 + 1.87868i)e^{\frac{-12\pi i}{4}} + (7.12132 + 4i)e^{\frac{-18\pi i}{4}} &
 \end{align*}
 
 Calculando cada exponencial complexa com a relação de Euler e substituindo os resultados na equação acima:
@@ -471,7 +475,7 @@ Temos então que o resultado dos descritores de Fourier da imagem é:
   funções fornecidas pela biblioteca NUMPY para facilitar a
   programação.
   
-O programa está na pasta source sob o nome $fourier\_descriptors.py$.
+O programa foi implementado em Python, com a biblioteca Numpy e está localizado em \textbf{source/fourier\_descriptors.py}.
 
 \item Para reconstruir a curva, faça uma função que receba um vetor
   com os descritores de Fourier, um número $N$ de descritores a serem
