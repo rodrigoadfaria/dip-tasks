@@ -541,18 +541,53 @@ figura que fizemos nos slides das aulas 15 e 16.
 %
 %
 %
-\item[{\bf Q4.}] \textbf{Apenas para os alunos de pós-graduação} 
+\item[{\bf Q4.}] \textbf{Apenas para os alunos de pós-graduação}
 \begin{itemize}
 \item Leia o artigo do Torre e do Poggio
   \url{ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-768.pdf}
   e faça um resumo de acordo com as indicações que deixei no
   paca (artigos sobre como fazer um resumo). 
+
+\textbf{TODO}
+
 \item O que é um problema mal-posto?
-\item O que é regularização? 
+\\Um problema matemático é bem-posto, de acordo com a definição de Hadamard, se ele cumpre as seguintes condições:
+\begin{enumerate}
+  \item Existe solução;
+  \item A solução é única;
+  \item A solução tem uma dependência contínua com os dados de entrada (quando o problema não é somente bem-posto, 
+  mas também, bem-condicionado, portanto, é robusto contra ruído);
+\end{enumerate}  
+
+Logo, um problema é dito mal-posto se alguma das condições acima não é satisfeita.  
+\\No artigo em questão, o problema mal-posto trata-se da diferenciação numérica, que pode ser considerada como um problema
+inverso da equação integral:
+
+\begin{equation} \label{eq:inverse_int}
+   g(x) = \int_{-\infty}^{x} f(\tilde{x}) d\tilde{x}
+\end{equation}
+
+onde $f(x)$ deve ser recuperada a partir do conhecimento dos dados $g(x)$ que, em geral, é obtido apenas em uma estrutura discreta.
+\\
+
+\item O que é regularização?
+\\Regularização, em linhas gerais, é a aproximação de um problema mal-posto por uma família de problemas bem-postos \cite{Engl-1981}.
+\\Conforme visto no item anterior, como temos um problema de diferenciação numérica e é sabido que ele é mal-posto, os autores 
+avaliaram alguns métodos de regularização para, então, aproximar uma solução.
+\\Um dos possíveis métodos são os operadores de Tikhonov que, para equações de convolução como em (\ref{eq:inverse_int}),
+os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)$, onde $\alpha$ é um parâmetro.
+\\
+
 \item Qual a importância do teorema apresentado no artigo?
+\textbf{TODO}
+
 \item O que são filtros de banda limitada? Qual a sua importância no
   artigo?
+\textbf{TODO}
+
 \item Quais são os métodos de encontrar borda apresentados no artigo?
+\textbf{TODO}
+
 \end{itemize}
 \end{itemize}
 
