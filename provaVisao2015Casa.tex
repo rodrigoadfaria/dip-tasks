@@ -13,6 +13,7 @@
 \usepackage{biblatex}
 \usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
 \usepackage{enumitem}
+\usepackage[export]{adjustbox}
 \addbibresource{references.bib}
 
 %\setlength{\parskip}{0.1cm}
@@ -121,8 +122,8 @@ O código completo está em \textbf{source/ela.py}.
     }
     \BlankLine
     \Retorna{\ElaImg}
-    \label{alg1}
     \caption{\textsc{Error Level Analysis}}
+    \label{alg1}
 \end{algorithm}
 
 \item Teste seu algoritmo com as imagens que deixei no paca para este exercício. 
@@ -134,21 +135,23 @@ a região manipulada terá um nível de erro diferente das regiões não manipul
 o nível de erro irá expor a região manipulada rotulando as regiões com maior alteração após
 a imagem ser salva com um nível de qualidade inferior \cite{krawetz}.
 
-Na Figura 1b, podemos ver o resultado do ELA na imagem dada. As regiões com maior chance de ter
+Na Figura \ref{fig1}, podemos ver o resultado do ELA na imagem dada. As regiões com maior chance de ter
 alterações são as que apresentam os pixels com maior brilho, uma vez que a alteração da imagem 
 causa instabilidade nestas áreas.
 \begin{figure}[htb]
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 	\centering
-        \includegraphics[scale=0.3]{Q3Images/cows_on_beach.jpg} 
-	\centerline{\label{fig1a} \small (1a) Imagem original}
+        \includegraphics[scale=0.3]{Q3Images/cows_on_beach.jpg}
+	\centerline{\small (1a) Imagem original}
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 	\centering
         \includegraphics[scale=0.3]{Q3Images/cows_on_beach_ela.jpg} 
-	\centerline{\label{fig1b} \small (1b) Imagem com o resultado do ELA}
+	\centerline{\small (1b) Imagem com o resultado do ELA}
 \end{minipage}
+\caption{Aplicação do método ELA}
+\label{fig1}
 \end{figure}
 
 Os resultados foram avaliados de acordo com o brilho das bordas que devem ser semelhantes no resultado 
@@ -234,13 +237,12 @@ retangular de duração $D$ e altura $A$ tem a forma dada por:
     F(\omega) = ADsinc\bigg(\frac{\omega D}{2}\bigg)  = AD\frac{sin(\frac{\omega D}{2})}{\frac{\omega D}{2}}
 \end{eqnarray*}
 
-A função $f(x)$ pode ser representada graficamente como:
-\begin{figure}[htb]
-\centering   
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.45]{Q3Images/pulse_function.png} 
-\end{minipage}
+A função $f(x)$ pode ser representada graficamente como (Figura \ref{fig:fig2}):
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Q3Images/pulse_function.png}
+    \caption{Função pulso retangular}
+    \label{fig:fig2}
 \end{figure}
 
 Onde:
@@ -309,12 +311,12 @@ f(x) = 2 . rect\bigg(\frac{x}{10}\bigg) = \left\{ \begin{array}{rl}
        \end{array} \right.
 \end{align*}
 
-\begin{figure}[htb]
-\centering   
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.45]{Q3Images/pulse_function_2.png} 
-\end{minipage}
+Cuja representação gráfica é (Figura \ref{fig:fig3}):
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Q3Images/pulse_function_2.png}
+    \caption{Função pulso retangular com D = 10 e A = 2}
+    \label{fig:fig3}
 \end{figure}
 
 Considerando agora a exponencial complexa, sabemos que ela representa um deslocamento no tempo,
@@ -326,14 +328,13 @@ que é $3$ neste caso e, portanto:
      0, &\mbox{ caso contrário}
            \end{array} \right.
 \end{align*}
-\begin{figure}[htb]
-\centering   
-\begin{minipage}[b]{0.45\textwidth}
-	\centering
-        \includegraphics[scale=0.45]{Q3Images/pulse_function_3.png} 
-\end{minipage}
-\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Q3Images/pulse_function_3.png}
+    \caption{Função pulso retangular com deslocamento no tempo}
+    \label{fig:fig4}
+\end{figure}
 
 %%%
 \item Calcule a DFT do sinal $f = \{1,3,5,3,1\}$
@@ -384,28 +385,30 @@ Temos então que o resultado da DFT é:
 %
 %
 %
-\item[{\bf Q3.}] 
+\item[{\bf Q3.}]
 \begin{itemize}
 \item Calcule (apresente os cálculos) dos descritores de Fourier das
-  figuras 3a e 3b. Lembre-se que os pontos da
+  figuras 5a e 5b. Lembre-se que os pontos da
   borda do quadrado serão representados por pontos no plano de
   Argand-Gauss. Isto é, cada ponto no plano passa a ser um número
   complexo e a borda passa a ser um vetor de pontos complexos, como
   num sinal, mas com valores complexos.
 
-    \begin{figure}[htb]
+\begin{figure}[htb]
     \centering
     \begin{minipage}[b]{0.45\textwidth}
     	\centering
             \includegraphics[scale=0.2]{Q3Images/square1.jpg} 
-    	\centerline{\label{fig3a} \small (3a) Quadrado de lado 1}
+    	\centerline{\small (5a) Quadrado de lado 1}
     \end{minipage}
     \begin{minipage}[b]{0.45\textwidth}
     	\centering
             \includegraphics[scale=0.3]{Q3Images/square3.jpg} 
-    	\centerline{\label{fig3b} \small (3b) Quadrado de lado 3}
+    	\centerline{\small (5b) Quadrado de lado 3}
     \end{minipage}
-    \end{figure}
+\caption{Figuras no plano cartesiano}
+\label{fig:fig5}
+\end{figure}
 
 \textbf{Resultados para a primeira imagem}
 
@@ -528,14 +531,25 @@ Temos então que o resultado dos descritores de Fourier da imagem é:
   funções fornecidas pela biblioteca NUMPY para facilitar a
   programação.
   
-O programa foi implementado em Python, com a biblioteca Numpy e está localizado em \textbf{source/fourier\_descriptors.py}.
+O programa foi implementado em Python, com a biblioteca Numpy e está localizado em \textbf{source/fourier\_descriptors.py}.\\
 
 \item Para reconstruir a curva, faça uma função que receba um vetor
   com os descritores de Fourier, um número $N$ de descritores a serem
   usados e grafique os pontos num plano cartesiano (para fazer a mesma 
 figura que fizemos nos slides das aulas 15 e 16.
 
-\textbf{TODO}
+O programa foi implementado em Python, com a biblioteca Numpy e está localizado em \textbf{source/ifd.py}.\\
+Basta executar o arquivo e passar um array com os descritores para que os pontos sejam desenhados. O tamanho
+$N$ do vetor é calculado pelo programa.\\
+A Figura \ref{fig:fig6}, por exemplo, foi gerada com o vetor de entrada:
+\\$0+4j, 2+4j, 3+3j, 3+2j, 2+1j, 2-1j, 1-2j, 0-3j,-1-3j, -2-2j, -2+0j, -2+1j, -1+3j$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Q3Images/fdescriptors_points.png}
+    \caption{Exemplo de pontos de contorno a partir de descritores de Fourier}
+    \label{fig:fig6}
+\end{figure}
 
 \end{itemize}
 %
@@ -548,7 +562,7 @@ figura que fizemos nos slides das aulas 15 e 16.
   e faça um resumo de acordo com as indicações que deixei no
   paca (artigos sobre como fazer um resumo). 
 
-\textbf{TODO}
+  \input{paper_review_poggio_torre}
 
 \item O que é um problema mal-posto?
 \\Um problema matemático é bem-posto, de acordo com a definição de Hadamard, se ele cumpre as seguintes condições:
@@ -581,8 +595,7 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
 \item Qual a importância do teorema apresentado no artigo?
 \textbf{TODO}
 
-\item O que são filtros de banda limitada? Qual a sua importância no
-  artigo?
+\item O que são filtros de banda limitada? Qual a sua importância no artigo?
 \textbf{TODO}
 
 \item Quais são os métodos de encontrar borda apresentados no artigo?
