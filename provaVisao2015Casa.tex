@@ -575,15 +575,7 @@ A Figura \ref{fig:fig6}, por exemplo, foi gerada com o vetor de entrada:
 \end{enumerate}  
 
 Logo, um problema é dito mal-posto se alguma das condições acima não é satisfeita.  
-\\No artigo em questão, o problema mal-posto trata-se da diferenciação numérica, que pode ser considerada como um problema
-inverso da equação integral:
-
-\begin{equation} \label{eq:inverse_int}
-   g(x) = \int_{-\infty}^{x} f(\tilde{x}) d\tilde{x}
-\end{equation}
-
-onde $f(x)$ deve ser recuperada a partir do conhecimento dos dados $g(x)$ que, em geral, é obtido apenas em uma estrutura discreta.
-\\
+\\No artigo em questão, o problema mal-posto trata-se da diferenciação de uma função $f(x)$ que é um típico problema mal-posto e pode ser visto como a solução do problema inverso visto no resumo em \ref{eq:inverse_problem} e \ref{eq:inverse_int}.
 
 \item O que é regularização?
 \\Regularização, em linhas gerais, é a aproximação de um problema mal-posto por uma família de problemas bem-postos \cite{Engl-1981}.

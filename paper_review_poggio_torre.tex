@@ -18,35 +18,83 @@
 \item \textbf{Resumo}
 \begin{enumerate}[label*=\arabic*.]
     \item \textbf{Motivação}
-    TODO
+    
+    \textbf{What is the research problem the paper attempts to address?}\\
+    Uma borda em uma imagem é caracterizada por um conjunto de pixels conectados que ficam na fronteira entre duas regiões de uma imagem com propriedades relativamente distintas de nível de cinza \cite{gonzalez2002digital}. Em outras palavras, as bordas caracterizam-se por mudanças na intensidade da imagem em termos de aspectos físicos que as originaram \cite{Torre-1986}.
+    
+    Em processamento de imagens, a percepção da mudança de intensidade pode ser obtida por vários métodos que, em geral, utilizam de um operador local diferencial para delinear as bordas.
+    
+    Torre e Poggio subdividem a detecção de bordas em duas etapas: uma etapa de filtragem para eliminação de ruídos da imagem  e uma segunda etapa que caracteriza-se pela avaliação das derivadas da intensidade da imagem, sendo esta última classificada como um problema de diferenciação numérica.
+    
+    Sabendo que a diferenciação numérica não é robusta contra ruído, Torre e Poggio mostram que a diferenciação de uma função $f(x)$ é um típico problema mal-posto e pode ser visto como a solução do problema inverso
+\begin{equation} \label{eq:inverse_problem}
+   g(x) = A f(x)
+\end{equation}
+
+onde $A f(x)$ é o operador integral
+
+\begin{equation} \label{eq:inverse_int}
+   \int_{-\infty}^{x} f(\tilde{x}) d\tilde{x} = \int_{-\infty}^{\infty} h(x - \tilde{x}) f(\tilde{x}) d\tilde{x}
+\end{equation}
+
+e $h$ é a função degrau.
+    
+    \textbf{What is the motivation of the research work?}\\
+    Uma vez que a diferenciação numérica é um problema mal-posto no sentido de Hadamard, conforme mostrado pelos autores, a motivação dá-se, então, em regularizar o problema para que ele se torne bem-posto por meio de uma operação de filtragem antes da diferenciação.
+    
+    \textbf{Is there a crisis in the research field that the paper attempts to resolve?}\\
+    Pode-se dizer que não há nenhuma crise evidente na área pesquisada pelos autores, mas
+    
+    \textbf{Is the research work attempting to overcome the weaknesses of existing approaches?}\\
+    há demonstrações de que a proposta de realizar uma operação de filtragem antes da diferenciação, reduz a sensibilidade a ruído a que esta etapa está suscetível, algo não considerado por alguns métodos, tais como o proposto por Shanmugam, Dickey e Green que não faz nenhuma referência explícita à etapa de diferenciação.
+    Vale ressaltar que, mesmo uma pequena quantidade de ruído na imagem produz um efeito crítico na diferenciação causando perturbação nos dados.
+    
+    \textbf{In short, what is the niche of the paper?}\\
+    Em suma, Torre e Poggio deixam claro que para tornar o problema de diferenciação bem-posto é necessário que as intensidades da imagem sejam regularizadas, cujo processo pode ser feito por uma operação de filtragem antes da diferenciação e, para tal, eles estudaram propriedades de diferentes tipos de filtros, bem como a relação entre vários operadores diferenciais bidimensionais. Além disso, propriedades geométricas e topológicas desses operadores também são avaliadas com o objetivo de obter bordas mais suaves, dentre outras características interessantes.
     \\[6pt]
 
     \item \textbf{Contribuição}
-    TODO
+    
+    \textbf{What are the claimed contributions of the paper?}\\
+    \textbf{What is new in this paper?}\\
+    \textbf{A new question is asked?}\\
+    \textbf{A new understanding of the research problem?}\\
+    \textbf{A new methodology for solving problems?}\\
+    \textbf{A new algorithm?}\\
+    \textbf{A new breed of software tools or systems?}\\
+    \textbf{A new experimental method?}\\
+    \textbf{A new proof technique? A new formalism or notation?}\\
+    \textbf{A new evidence to substantiate or disprove a previously published claim?}\\
+    \textbf{A new research area?}\\
+    \textbf{In short, what is innovative about this paper?}
     \\[6pt]
 
     \item \textbf{Metodologia}
-    TODO
+    
+    \textbf{How do the authors substantiate their claims?}\\
+    \textbf{What is the methodology adopted to substantiate the claims?}\\
+    \textbf{What is the argument of the paper?}\\
+    \textbf{What are the major theorems?}\\
+    \textbf{What experiments are conducted?}\\
+    \textbf{Data analyses?}\\
+    \textbf{Simulations?\\ Benchmarks?}\\
+    \textbf{User studies?}\\
+    \textbf{Case studies?}\\
+    \textbf{Examples?}\\
+    \textbf{In short, what makes the claims scientific (as opposed to being mere opinions1)?}
     \\[6pt]
 
     \item \textbf{Conclusão}
-    TODO
-\end{enumerate}
-
-\item \textbf{Crítica}
-\begin{enumerate}[label*=\arabic*.]
-    \item \textbf{Capacidade de inovação}
-    TODO
-    \\[6pt]
     
-    \item \textbf{Ausência de embasamento teórico}
-    TODO
+    \textbf{What are the conclusions?}\\
+    \textbf{What have we learned from the paper?}\\
+    \textbf{Shall the standard practice of the field be changed as a result of the new findings?}\\
+    \textbf{Is the result generalizable?}\\
+    \textbf{Can the result be applied to other areas of the field?}\\
+    \textbf{What are the open problems?}\\
+    \textbf{In short, what are the lessons one can learn from the paper?}
+
+\end{enumerate}
 \end{enumerate}
 
-\item \textbf{Sugestões}
-\begin{enumerate}[label*=\arabic*.]
-    \item \textbf{Mudança de paradigma para \textit{open source}}
-    TODO
-\end{enumerate}
-\end{enumerate}
 \noindent\rule{14.5cm}{0.4pt}
