@@ -56,16 +56,17 @@ e $h$ é a função degrau.
     \item \textbf{Contribuição}
     
     \textbf{What are the claimed contributions of the paper?}\\
+    Os autores também mostram que há três métodos principais de regularização de acordo com a definição de Bertero. Além disso, a diferenciação também pode ser regularizada com operadores de estabilização de Tikhonov, que neste caso são equivalentes a filtragem dos dados com filtros passa-baixa.\\
+    Com o intuito de reformular os resultados obtidos por Schoenberg, Poggio \cite{Poggio1988106}, em um trabalho que, à época, ainda não havia sido publicado, provou que a solução para a regularização do problema da diferenciação numérica em dados não exatos, pode ser obtida pela convolução dos dados com um filtro, que neste caso é uma spline cúbica, que por sua vez, é muito similar à uma Gaussiana.
+    
     \textbf{What is new in this paper?}\\
-    \textbf{A new question is asked?}\\
-    \textbf{A new understanding of the research problem?}\\
-    \textbf{A new methodology for solving problems?}\\
-    \textbf{A new algorithm?}\\
-    \textbf{A new breed of software tools or systems?}\\
-    \textbf{A new experimental method?}\\
+    O resultado obtido por Poggio, citado em forma de teorema neste trabalho, é a prova mais simples e rigorosa de que um filtro Gaussiano representa a correta operação a ser realizada antes da diferenciação para detecção de borda.\\
+    Esta justificativa dá o potencial de inovação e importante contribuição para mostrar que a filtragem seguida pela diferenciação podiam ser reconhecidas como operações presentes na maioria dos métodos de detecção de borda existentes até então.
+    
     \textbf{A new proof technique? A new formalism or notation?}\\
-    \textbf{A new evidence to substantiate or disprove a previously published claim?}\\
-    \textbf{A new research area?}\\
+    Vale ressaltar ainda que Poggio \cite{Poggio1988106} analisa o papel do parâmetro de regularização $\lambda$, sua conexão com a escala do filtro Gaussiano e discute métodos para encontrar o parâmetro $\lambda$ ótimo.
+    
+    Outra contribuição importante feita por Torre e Poggio foi a observação de três tipos de filtros: passa banda, suporte limitado e de incerteza mínima, sendo que o filtro passa banda, bem como de incerteza mínima são bons operadores de regularização para a diferenciação no sentido de Tikhonov.
     \textbf{In short, what is innovative about this paper?}
     \\[6pt]
 
