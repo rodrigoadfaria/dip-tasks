@@ -590,7 +590,10 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
     Essa implicação é determinante para demonstrar que a convolução dos dados pode, então, ser realizada com um filtro Gaussiano.\\
 
 \item O que são filtros de banda limitada? Qual a sua importância no artigo?
-\textbf{TODO}\\
+    
+    Também conhecidos como filtros passa-banda, permitem a passagem das frequências localizadas em uma faixa ou banda específica, enquanto atenua ou completamente suprime todas as outras frequências \cite{pedrini2008analise}.
+    
+    Sua importância no artigo se dá na capacidade de identificar bordas, uma vez que as baixas frequências são suprimidas, ao mesmo tempo que o ruído é reduzido pela atenuação de frequências altas. Além disso, eles atendem a todas as condições de Tikhonov na regularização da diferenciação numérica.\\
 
 \item Quais são os métodos de encontrar borda apresentados no artigo?
 \\Os métodos de detecção de borda apresentados no artigo são:
@@ -599,10 +602,10 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
     Proposto por Herskovitz e Binford, o filtro DOB é do tipo suporte limitado e utiliza a função de Haar para filtragem direcional
     ou diferença de funções para filtragem rotacional.
     A função de Haar tem a propriedade de ser um filtro ótimo de suporte limitado que maximiza a relação sinal-ruído.
-    \\
+    
     \item \textbf{Shanmugam, Dickey and Green}\\
     O operador proposto por Shanmugam, Dickey e Green, como citado por Torre e Poggio, é um filtro ótimo na medida em que produz o máximo de energia dentro de um intervalo de um dado espaço ao redor da borda. Eles analisaram os casos contínuo e discreto e concluíram que a implementação pode ser realizada por meio da Transformada Rápida de Fourier (FFT).
-    \\
+    
     \item \textbf{Laplacian of Gaussian - LOG}\\
     Proposto por Marr e Hildreth, o Laplaciano do Gaussiano combina a filtragem Gaussiana para a suavização da imagem, com o operador Laplaciano
     que localiza as bordas pela presença de um cruzamento em zero na derivada segunda com um pico acentuado correspondente à derivada primeira \cite{pedrini2008analise}.\\
@@ -611,15 +614,15 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
         (\nabla^2 G(x, y)) * f(x, y)
     \end{equation}
     onde $f(x, y)$ é uma imagem suavizada por uma função Gaussiana.
-    \\
+    
     \item \textbf{Haralick}\\
     O método proposto por Haralick consiste em marcar um pixel como parte integrante da borda se na sua vizinhança há passagens em zero da segunda derivada ao longo do gradiente. Com o propósito de calcular as derivadas, Haralick aproxima e interpola os valores de intensidade amostrados com polinômios discretos de Chebychev.
-    \\
+    
     \item \textbf{Canny}\\
     De acordo com Pedrini \cite{pedrini2008analise}, com o intuito de otimizar a localização de pontos de borda na presença de ruído, o método de Canny suaviza a imagem por meio de um filtro Gaussiano e, em seguida, a magnitude e a direção do gradiente são calculadas utilizando aproximações baseadas em diferenças finitas para as derivadas parciais.\\
     Após o cálculo do gradiente, a borda é localizada utilizando supressão não-máxima, ou seja, apenas os pontos cuja magnitude seja localmente máxima na direção do gradiente.\\
     Fragmentos espúrios causados pela presença de ruído ou textura fina são então removidos com a aplicação de dois limiares diferentes, cujo processo é conhecido como \textit{limiarização por histerese}.
-    \\
+
 \end{enumerate}
 
 \end{itemize}
