@@ -19,10 +19,9 @@
 \begin{enumerate}[label*=\arabic*.]
     \item \textbf{Motivação}
     
-    \textbf{What is the research problem the paper attempts to address?}\\
     Uma borda em uma imagem é caracterizada por um conjunto de pixels conectados que ficam na fronteira entre duas regiões de uma imagem com propriedades relativamente distintas de nível de cinza \cite{gonzalez2002digital}. Em outras palavras, as bordas caracterizam-se por mudanças na intensidade da imagem em termos de aspectos físicos que as originaram \cite{Torre-1986}.
     
-    Em processamento de imagens, a percepção da mudança de intensidade pode ser obtida por vários métodos que, em geral, utilizam de um operador local diferencial para delinear as bordas.
+    Em processamento de imagens, a percepção da mudança de intensidade pode ser obtida por vários métodos que, em geral, utilizam de um operador local diferencial para identificar as bordas.
     
     Torre e Poggio subdividem a detecção de bordas em duas etapas: uma etapa de filtragem para eliminação de ruídos da imagem  e uma segunda etapa que caracteriza-se pela avaliação das derivadas da intensidade da imagem, sendo esta última classificada como um problema de diferenciação numérica.
     
@@ -39,85 +38,90 @@ onde $A f(x)$ é o operador integral
 
 e $h$ é a função degrau.
     
-    \textbf{What is the motivation of the research work?}\\
     Uma vez que a diferenciação numérica é um problema mal-posto no sentido de Hadamard, conforme mostrado pelos autores, a motivação dá-se, então, em regularizar o problema para que ele se torne bem-posto por meio de uma operação de filtragem antes da diferenciação.
     
-    \textbf{Is there a crisis in the research field that the paper attempts to resolve?}\\
-    Pode-se dizer que não há nenhuma crise evidente na área pesquisada pelos autores, mas
+    Pode-se dizer que não há nenhuma crise evidente na área pesquisada pelos autores, mas há demonstrações de que a proposta de realizar uma operação de filtragem antes da diferenciação reduz a sensibilidade a ruído a que esta etapa está suscetível, algo não considerado por alguns métodos, tais como o proposto por Shanmugam, Dickey e Green que não faz nenhuma referência explícita à etapa de diferenciação.
     
-    \textbf{Is the research work attempting to overcome the weaknesses of existing approaches?}\\
-    há demonstrações de que a proposta de realizar uma operação de filtragem antes da diferenciação, reduz a sensibilidade a ruído a que esta etapa está suscetível, algo não considerado por alguns métodos, tais como o proposto por Shanmugam, Dickey e Green que não faz nenhuma referência explícita à etapa de diferenciação.
-    Vale ressaltar que, mesmo uma pequena quantidade de ruído na imagem produz um efeito crítico na diferenciação causando perturbação nos dados.
+    Vale ressaltar que, mesmo uma pequena quantidade de ruído na imagem produz um efeito crítico na diferenciação, causando perturbação nos dados.
     
-    \textbf{In short, what is the niche of the paper?}\\
-    Em suma, Torre e Poggio deixam claro que para tornar o problema de diferenciação bem-posto é necessário que as intensidades da imagem sejam regularizadas, cujo processo pode ser feito por uma operação de filtragem antes da diferenciação e, para tal, eles estudaram propriedades de diferentes tipos de filtros, bem como a relação entre vários operadores diferenciais bidimensionais. Além disso, propriedades geométricas e topológicas desses operadores também são avaliadas com o objetivo de obter bordas mais suaves, dentre outras características interessantes.
+    Em suma, Torre e Poggio deixam claro que para tornar o problema de diferenciação bem-posto é necessário que as intensidades da imagem sejam regularizadas, cujo processo pode ser feito por uma operação de filtragem antes da diferenciação e, para tal, eles estudaram propriedades de diferentes tipos de filtros, bem como a relação entre vários operadores diferenciais bidimensionais. Além disso, propriedades geométricas e topológicas desses operadores também são avaliadas com o objetivo de obter bordas mais suaves e contornos fechados, dentre outras características interessantes.
     \\[6pt]
 
     \item \textbf{Contribuição}
     
-    \textbf{What are the claimed contributions of the paper?}\\
-    Os autores também mostram que há três métodos principais de regularização de acordo com a definição de Bertero. Além disso, a diferenciação também pode ser regularizada com operadores de estabilização de Tikhonov, que neste caso são equivalentes a filtragem dos dados com filtros passa-baixa.\\
-    Com o intuito de reformular os resultados obtidos por Schoenberg, Poggio, Voorhees e Yuille \cite{Poggio1988106}, em um trabalho que, à época, ainda não havia sido publicado, provaram que a solução para a regularização do problema da diferenciação numérica em dados não exatos, pode ser obtida pela convolução dos dados com um filtro, que neste caso é uma spline cúbica, que por sua vez, é muito similar à uma Gaussiana.
+    Há três métodos principais de regularização de acordo com a definição de Bertero, além dos operadores de estabilização de Tikhonov.
     
-    \textbf{What is new in this paper?}\\
-    O resultado obtido por Poggio, citado em forma de teorema neste trabalho, é a prova mais simples e rigorosa de que um filtro Gaussiano representa a correta operação a ser realizada antes da diferenciação para detecção de borda.\\
-    Esta justificativa dá o potencial de inovação e importante contribuição para mostrar que a filtragem seguida pela diferenciação podiam ser reconhecidas como operações presentes na maioria dos métodos de detecção de borda existentes até então.
+    Poggio \textit{et al.} \cite{Poggio1988106}, com base em dois métodos dos propostos por Bertero e no funcional de Tikhonov como $P = d^2 / dx^2$, reformulou os resultados obtidos por Schoenberg, em um trabalho que, à época, ainda não havia sido publicado, provando que a solução para a regularização do problema da diferenciação numérica em dados não exatos, pode ser obtida pela convolução dos dados com um filtro, que neste caso é uma spline cúbica.
     
-    \textbf{A new proof technique? A new formalism or notation?}\\
-    Vale ressaltar ainda que Poggio \cite{Poggio1988106} analisa o papel do parâmetro de regularização $\lambda$, sua conexão com a escala do filtro Gaussiano e discute métodos para encontrar o parâmetro $\lambda$ ótimo.
+    O resultado foi estendido por Torre e Poggio, citado em forma de teorema neste trabalho, provando que, além da convolução poder ser realizada com um filtro spline cúbico, ele é muito similar à uma Gaussiana. Essa é a prova mais simples e rigorosa de que um filtro Gaussiano representa a correta operação a ser realizada antes da diferenciação para detecção de borda.
+    
+    Essa justificativa dá o potencial de inovação e importante contribuição para mostrar que a filtragem seguida pela diferenciação podiam ser reconhecidas como operações presentes na maioria dos métodos de detecção de borda existentes até então.
+    
+    Vale ressaltar, ainda, que Poggio \cite{Poggio1988106} analisa o papel do parâmetro de regularização $\lambda$, sua conexão com a escala do filtro Gaussiano e discute métodos para encontrar o parâmetro $\lambda$ ótimo.
     
     Outra contribuição importante feita por Torre e Poggio foi a observação de três tipos de filtros: passa banda, suporte limitado e de incerteza mínima, sendo que o filtro passa banda, bem como de incerteza mínima são bons operadores de regularização para a diferenciação no sentido de Tikhonov.
-    \textbf{In short, what is innovative about this paper?}
     \\[6pt]
 
     \item \textbf{Metodologia}
     
-    \textbf{How do the authors substantiate their claims?}\\
-    Os autores fundamentam o trabalho, a princípio, postando a natureza do problema de diferenciação numérica como um problema mal-posto de encontrar $x$ dos dados $y$ tal que $Az = y$, sendo que para a regularização é necessário a escolha de normas adequadas $||.||$ e de um funcional de estabilização $||Pz||$.\\
-    Logo, três métodos de regularização propostos por Bertero são mostrados. O primeiro consiste em encontrar a função $z$ que minimiza $||Az - y||$ e satisfaz a restrição $||Pz|| < C_{1}$, onde $C_{1}$ é uma constante.\\
-    O segundo calcula a função $z$ que está suficientemente próxima dos dados e é mais regular, minimizando $||Pz||$ e obedecendo à restrição $||Az - y|| \leq C_{2}$, onde $C_{2}$ é uma constante.\\
-    O último método consiste em encontrar a função $z$ que minimiza $||Az - y||^2 + \lambda ||Pz||^2$, onde $\lambda$ é um parâmetro de regularização que controla o grau de regularização da solução e a aproximação dos dados.\\
-    Outra forma de regularizar o problema de diferenciação são os operadores de Tikhonov que são equivalentes à filtragem dos dados com filtros passa-baixa.\\
+    Os autores fundamentam o trabalho, a princípio, postando a natureza do problema de diferenciação numérica como um problema mal-posto de encontrar $x$ dos dados $y$ tal que $Az = y$, sendo que, para a regularização é necessário a escolha de normas adequadas $||.||$ e de um funcional de estabilização $||Pz||$.
     
-    \textbf{What are the major theorems?}\\
-    Conforme supra citado, Poggio \textit{et al.} \cite{Poggio1988106} reformulou os resultados obtidos por Schoenberg, na forma de um teorema que diz que a interpolação de uma spline cúbica em uma estrutura regular, satisfazendo o segundo método de regularização com $P = d^2 / dx^2$, pode ser obtida pela convolução dos dados com um filtro spline cúbico, que é uma função $L^4$ de Schoenberg, onde $P$ corresponde a forma mais simples do funcional de Tikhonov. Logo, a regularização pode ser obtida realizando a convolução dos dados com a primeira derivada do filtro $L^4$ de Shoenberg.\\
-    No caso de dados não exatos, Poggio \textit{et al.} \cite{Poggio1988106} utilizou o terceiro método de regularização que, por conseguinte, originou um novo teorema proposto neste artigo provando que a solução pode ser obtida pela convolução dos dados com um filtro, o qual é uma spline cúbica e é muito similar a uma Gaussiana.\\
-    Essa implicação é determinante para demonstrar que a convolução dos dados pode, então, ser realizada com um filtro Gaussiano.\\
-    Tão logo, Torre e Poggio avaliam três tipos de filtros que podem ser utilizados nessa etapa, observando o tipo da derivada, se direcionais ou invariantes à rotação, e o tipo de representação, se zeros ou extremos. Os filtros de banda limitada satisfazem todas as condições de Tikhonov para a regularização da diferenciação, bem como os filtros de incerteza mínima.\\
-    Já o caso dos filtros de suporte limitado, os autores mostram que o \textit{blurring} é uma classe desse tipo de filtro que falha em atender algumas propriedades para que possa ser aplicado à convolução. Em particular, a condição $\tilde{F}(\omega, \alpha) j\omega$ pertence a $L_{2}(-\infty, \infty)$, não é satisfeita, uma vez que a diferenciação introduz de volta altas frequências na mesma quantidade em que elas foram removidas por este tipo de filtragem.\\
-    Vale lembrar que, a função Gaussiana $e^{-x^2/\sigma^2}$ é a função real $f \in L^2$ que minimiza a incerteza definida por $\Delta U = \Omega X$ no domínio da frequência e do espaço e, por essa razão, foi escolhida como o filtro ótimo por Marr e Hildreth na elaboração do trabalho que originou o operador Laplaciano do Gaussiano.\\
+    Logo, três métodos de regularização propostos por Bertero são mostrados. O primeiro consiste em encontrar a função $z$ que minimiza $||Az - y||$ e satisfaz a restrição $||Pz|| < C_{1}$, onde $C_{1}$ é uma constante.
     
-    \textbf{What experiments are conducted?}\\
-    Torre e Poggio fazem ainda uma comparação entre a função prolato e a Gaussiana, com o objetivo de mostrar uma aproximação satisfatória entre ambas, de acordo com parâmetros pré definidos. Além disso, eles mostram a robustez das propriedades de regularização do filtro Gaussiano, comparando a convolução do mesmo com uma imagem $I(x, y)$ vista como a solução da equação do calor no caso bidimensional.\\
-    Tendo devidamente estudado a etapa de regularização e filtragem, a etapa de diferenciação foi dividida nos operados diferenciais direcionais e os operados diferenciais invariantes à rotação.\\
-    O primeiro provoca manchas nos contornos com passagens em zero, mas não pelo uso do operador e sim pela distorção introduzida por um operador de largura demasiada.\\
-    No caso dos operadores invariantes à rotação, dois deles merecem destaque por serem amplamente utilizados em função de possuírem características interessantes que são o Laplaciano $\nabla ^2$, que é um operador linear e a derivada segunda ao longo do gradiente $\partial^2 /\ \partial n^2$, que é um operador não linear.\\
-    Propriedades dos operadores invariantes à rotação são, então, derivadas, especialmente àquelas relacionadas a passagens em zero que mostram, por exemplo, que em dadas condições, as derivadas tanto do Laplaciano quanto da derivada segunda ao longo do gradiente coincidem. Outra propriedade interessante destes operadores é que eles são rotacionalmente simétricos, conforme visto em suas respectivas representações em coordenadas polares.\\
-    Um estudo das propriedades geométricas e topológicas dos contornos também foi fornecido mostrando que, em geral, operadores invariantes à rotação detectam bordas mais suaves, curvas fechadas, características normalmente não encontradas nos operadores direcionais.\\
-    Esse estudo se faz importante, já que contornos são frequentemente obtidos a partir de bordas e representam fronteiras entre objetos na imagem. Sendo assim, eles precisam ser curvas fechadas e quando são obtidos a partir das bordas, é necessário interligá-las, a fim de se obter um contorno fechado, evitando que apenas pontos ou extremos da imagem resultante da derivação sejam a representação das bordas que está se avaliando.
+    O segundo calcula a função $z$ que está suficientemente próxima dos dados e é mais regular, minimizando $||Pz||$ e obedecendo à restrição $||Az - y|| \leq C_{2}$, onde $C_{2}$ é uma constante.
     
-    \textbf{Simulations? Benchmarks?}\\
+    O último método consiste em encontrar a função $z$ que minimiza $||Az - y||^2 + \lambda ||Pz||^2$, onde $\lambda$ é um parâmetro de regularização que controla o grau de regularização da solução e a aproximação dos dados.
+    
+    Outra forma de regularizar o problema de diferenciação são os operadores de Tikhonov que são equivalentes à filtragem dos dados com filtros passa-baixa.
+    
+    Conforme supra citado, Poggio \textit{et al.} \cite{Poggio1988106} reformulou os resultados obtidos por Schoenberg, na forma de um teorema que diz que a interpolação de uma spline cúbica em uma estrutura regular, satisfazendo o segundo método de regularização com $P = d^2 / dx^2$, pode ser obtida pela convolução dos dados com um filtro spline cúbico, que é uma função $L^4$ de Schoenberg, onde $P$ corresponde a forma mais simples do funcional de Tikhonov. Logo, a regularização pode ser obtida realizando a convolução dos dados com a primeira derivada do filtro $L^4$ de Shoenberg.
+    
+    No caso de dados não exatos, Torre e Poggio utilizaram o terceiro método de regularização que, por conseguinte, originou um novo teorema proposto neste artigo provando que a solução pode ser obtida pela convolução dos dados com um filtro, o qual é uma spline cúbica e é muito similar a uma Gaussiana.
+    
+    Essa implicação é determinante para demonstrar que a convolução dos dados pode, então, ser realizada com um filtro Gaussiano.
+    
+    Em seguida, Torre e Poggio avaliaram três tipos de filtros que podem ser utilizados nessa etapa, observando o tipo da derivada, se direcionais ou invariantes à rotação, e o tipo de representação, se zeros ou extremos. Os filtros de banda limitada satisfazem todas as condições de Tikhonov para a regularização da diferenciação, bem como os filtros de incerteza mínima.
+    
+    Já o caso dos filtros de suporte limitado, os autores mostram que o \textit{blurring} é uma classe desse tipo de filtro que falha em atender algumas propriedades para que possa ser aplicado à convolução. Em particular, a condição $\tilde{F}(\omega, \alpha) j\omega$ pertence a $L_{2}(-\infty, \infty)$, não é satisfeita, uma vez que a diferenciação introduz de volta altas frequências na mesma quantidade em que elas foram removidas por este tipo de filtragem.
+    
+    Vale lembrar que, a função Gaussiana $e^{-x^2/\sigma^2}$ é a função real $f \in L^2$ que minimiza a incerteza definida por $\Delta U = \Omega X$ no domínio da frequência e do espaço e, por essa razão, foi escolhida como o filtro ótimo por Marr e Hildreth na elaboração do trabalho que originou o operador Laplaciano do Gaussiano.
+    
+    Torre e Poggio fazem ainda uma comparação entre a função prolato e a Gaussiana, com o objetivo de mostrar uma aproximação satisfatória entre ambas, de acordo com parâmetros pré definidos. Além disso, eles mostram a robustez das propriedades de regularização do filtro Gaussiano, comparando a convolução do mesmo com uma imagem $I(x, y)$ vista como a solução da equação do calor no caso bidimensional.
+    
+    Tendo devidamente estudado a etapa de regularização e filtragem, a etapa de diferenciação foi dividida nos operados diferenciais direcionais e os operados diferenciais invariantes à rotação.
+    
+    O primeiro provoca manchas nos contornos com passagens em zero, mas não pelo uso do operador e sim pela distorção introduzida por um operador de largura demasiada.
+    
+    No caso dos operadores invariantes à rotação, dois deles merecem destaque por serem amplamente utilizados em função de possuírem características interessantes que são o Laplaciano $\nabla ^2$, que é um operador linear e a derivada segunda ao longo do gradiente $\partial^2 /\ \partial n^2$, que é um operador não linear.
+    
+    Propriedades dos operadores invariantes à rotação são, então, derivadas, especialmente àquelas relacionadas a passagens em zero que mostram, por exemplo, que em dadas condições, as derivadas tanto do Laplaciano quanto da derivada segunda ao longo do gradiente coincidem. Outra propriedade interessante destes operadores é que eles são rotacionalmente simétricos, conforme visto em suas respectivas representações em coordenadas polares.
+    
+    Um estudo das propriedades geométricas e topológicas dos contornos também foi fornecido mostrando que, em geral, operadores invariantes à rotação detectam bordas mais suaves, curvas fechadas, características normalmente não encontradas nos operadores direcionais.
+    
+    Esse estudo se faz importante, já que contornos são frequentemente obtidos a partir de bordas e representam fronteiras entre objetos na imagem. Sendo assim, eles precisam ser curvas fechadas e quando são obtidos a partir das bordas, é necessário interligá-las, a fim de se obter um contorno fechado, evitando que apenas pontos ou extremos da imagem resultante da derivação sejam a representação das bordas observadas.
+    
     Por fim, os autores estabeleceram uma comparação com os principais resultados obtidos e um \textit{overview} de alguns métodos de detecção de borda como o \textit{Difference of Boxes} proposto por Binford, o operador de Shanmugam, Dickey e Green, o Laplaciano do Gaussiano (LOG) de Marr e Hildreth, o método de Haralick e de Canny.
 
-    \textbf{In short, what makes the claims scientific (as opposed to being mere opinions)?}
-    É evidente que o artigo está extremamente bem embasado, com referências a importantes trabalhos que contribuíram para o aperfeiçoamento dos métodos de detecção de borda ao longo dos anos, além de ter demonstrações matemáticas e teoremas consistentes que fundamentam o objetivo principal de encontrar técnicas de regularização para o problema de diferenciação e mostrar que há uma dada ordem na operação desta última e com a filtragem da imagem.
+    É evidente que o artigo está extremamente bem embasado, com referências a importantes trabalhos que contribuíram para o aperfeiçoamento dos métodos de detecção de borda ao longo dos anos, além de ter demonstrações matemáticas e teoremas consistentes que fundamentam o objetivo principal de encontrar técnicas de regularização para o problema de diferenciação e mostrar que há uma dada ordem na operação desta última com a filtragem da imagem.
     \\[6pt]
 
     \item \textbf{Conclusão}
     
-    \textbf{What are the conclusions?}\\
-    Conforme já mencionado, Torre e Poggio concluíram que a filtragem tem a atribuição de regularizar o problema mal-posto da diferenciação e que ela deve ser realizada antes desta última. Outro ponto importante é que funções prolato regularizam melhor a imagem já que elas deixam a imagem "inteira" e com banda limitada, porém, o filtro Gaussiano tem duas vantagens sobre funções prolato. A primeira é que elas não geram passagens em zero quando o tamanho do filtro é incrementado. A segunda, no caso bidimensional, a Gaussiana pode ser decomposta no produto de dois filtros unidimensionais, o que reduz drasticamente a quantidade de cálculo envolvido na aplicação do filtro.\\
-Uma outra observação importante é que os filtros rotacionalmente simétricos garantem uma alta probabilidade de contornos fechados e bordas mais suaves, o que torna a escolha desses operadores bastante óbvia em detrimento dos filtros direcionais.\\
-Na etapa de diferenciação, quando da aplicação de operadores direcionais, duas derivadas em apenas duas direções são necessárias para encontrar as mudanças de intensidade. No caso de operadores invariantes à rotação, a derivada de segunda ordem ao longo do gradiente tem uma melhore performance do que o Laplaciano, porém, este último é comutativo com a convolução.\\
-Finalmente, propriedades topológicas e geométricas são derivadas de forma a caracterizar os tipos de mudanças de intensidade da imagem em termos de propriedades físicas que as geraram.
-
-    \textbf{Shall the standard practice of the field be changed as a result of the new findings?}\\
-    As práticas de detecção de borda podem ser alteradas de forma a considerar os resultados obtidos pelos autores a fim de gerarem bordas mais suaves e com menos ruído, o que faz os resultados serem, de fato, genéricos.
+    Conforme já mencionado, Torre e Poggio concluíram que a filtragem tem a atribuição de regularizar o problema mal-posto da diferenciação e que ela deve ser realizada antes desta última.
     
-    \textbf{What are the open problems?}\\
+    Outro ponto importante é que funções prolato regularizam melhor a imagem já que elas deixam a imagem "inteira" e com banda limitada, porém, o filtro Gaussiano tem duas vantagens sobre funções prolato. A primeira é que elas não geram passagens em zero quando o tamanho do filtro é incrementado. A segunda, no caso bidimensional, a Gaussiana pode ser decomposta no produto de dois filtros unidimensionais, o que reduz drasticamente a quantidade de cálculos envolvidos na aplicação do filtro.
+    
+    Uma outra observação importante é que os filtros rotacionalmente simétricos garantem uma alta probabilidade de contornos fechados e bordas mais suaves, o que torna a escolha desses operadores bastante óbvia em detrimento dos filtros direcionais.
+    
+    Na etapa de diferenciação, quando da aplicação de operadores direcionais, duas derivadas em apenas duas direções são necessárias para encontrar as mudanças de intensidade. No caso de operadores invariantes à rotação, a derivada de segunda ordem ao longo do gradiente tem uma melhor performance do que o Laplaciano, porém, este último é comutativo com a convolução.
+    
+    Finalmente, propriedades topológicas e geométricas são derivadas de forma a caracterizar os tipos de mudanças de intensidade da imagem em termos de propriedades físicas que as geraram.
+
+    As práticas de detecção de borda podem ser alteradas de forma a considerar os resultados obtidos pelos autores, a fim de gerarem bordas mais suaves e com menos ruído, o que faz os resultados serem, de fato, genéricos.
+    
     Torre e Poggio deixam uma questão em aberto em relação ao funcionamento do sistema visual humano e os operadores diferenciais, ou seja, quais operadores e em que combinações eles devem ser organizados para realizar tarefas sob diferentes condições.
-    \textbf{In short, what are the lessons one can learn from the paper?}
-    Em suma, pode-se tomar como lições do artigo que a identificação de transições de intensidade na imagem para detecção de bordas é um problema de diferenciação numérica que precisa ser regularizado no intuito de reduzir a sensibilidade a ruídos. Além disso, para se obter resultados satisfatórios, tais como curvas fechadas e bordas mais suaves, características de diferentes filtros e propriedades geométricas dos operadores diferenciais devem ser detalhadamente avaliadas.
+    
+    Em suma, pode-se tomar como lições do artigo que a identificação de transições de intensidade na imagem para detecção de bordas é um problema de diferenciação numérica que precisa ser regularizado, no intuito de reduzir a sensibilidade a ruídos. Além disso, para se obter resultados satisfatórios, tais como curvas fechadas e bordas mais suaves, características de diferentes filtros e propriedades geométricas dos operadores diferenciais devem ser detalhadamente avaliadas.
 
 \end{enumerate}
 \end{enumerate}
