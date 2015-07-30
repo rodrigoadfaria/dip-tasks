@@ -600,9 +600,7 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
     A função de Haar tem a propriedade de ser um filtro ótimo de suporte limitado que maximiza a relação sinal-ruído.
     \\
     \item \textbf{Shanmugam, Dickey and Green}\\
-    O operador proposto por Shanmugam, Dickey e Green, como citado por Torre e Poggio, é um filtro ótimo na medida em que produz
-    o máximo de energia dentro de um intervalo de um dado espaço ao redor da borda. Eles analisaram os casos contínuo e discreto e
-    concluíram que a implementação pode ser realizada por meio da Transformada Rápida de Fourier (FFT).
+    O operador proposto por Shanmugam, Dickey e Green, como citado por Torre e Poggio, é um filtro ótimo na medida em que produz o máximo de energia dentro de um intervalo de um dado espaço ao redor da borda. Eles analisaram os casos contínuo e discreto e concluíram que a implementação pode ser realizada por meio da Transformada Rápida de Fourier (FFT).
     \\
     \item \textbf{Laplacian of Gaussian - LOG}\\
     Proposto por Marr e Hildreth, o Laplaciano do Gaussiano combina a filtragem Gaussiana para a suavização da imagem, com o operador Laplaciano
@@ -614,16 +612,12 @@ os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)
     onde $f(x, y)$ é uma imagem suavizada por uma função Gaussiana.
     \\
     \item \textbf{Haralick}\\
-    O método proposto por Haralick consiste em marcar um pixel como parte integrante da borda se na sua vizinhança há passagens em zero da segunda 
-    derivada ao longo do gradiente. Com o propósito de calcular as derivadas, Haralick aproxima e interpola os valores de intensidade amostrados
-    com polinômios discretos de Chebychev.
+    O método proposto por Haralick consiste em marcar um pixel como parte integrante da borda se na sua vizinhança há passagens em zero da segunda derivada ao longo do gradiente. Com o propósito de calcular as derivadas, Haralick aproxima e interpola os valores de intensidade amostrados com polinômios discretos de Chebychev.
     \\
     \item \textbf{Canny}\\
     De acordo com Pedrini \cite{pedrini2008analise}, com o intuito de otimizar a localização de pontos de borda na presença de ruído, o método de Canny suaviza a imagem por meio de um filtro Gaussiano e, em seguida, a magnitude e a direção do gradiente são calculadas utilizando aproximações baseadas em diferenças finitas para as derivadas parciais.\\
-    Após o cálculo do gradiente, a borda é localizada utilizando supressão não-máxima, ou seja, apenas os pontos cuja magnitude seja localmente 
-    máxima na direção do gradiente.\\
-    Fragmentos espúrios causados pela presença de ruído ou textura fina são então removidos com a aplicação de dois limiares diferentes,
-    cujo processo é conhecido como \textit{limiarização por histerese}.
+    Após o cálculo do gradiente, a borda é localizada utilizando supressão não-máxima, ou seja, apenas os pontos cuja magnitude seja localmente máxima na direção do gradiente.\\
+    Fragmentos espúrios causados pela presença de ruído ou textura fina são então removidos com a aplicação de dois limiares diferentes, cujo processo é conhecido como \textit{limiarização por histerese}.
     \\
 \end{enumerate}
 

@@ -91,26 +91,33 @@ e $h$ é a função degrau.
     Torre e Poggio fazem ainda uma comparação entre a função prolato e a Gaussiana, com o objetivo de mostrar uma aproximação satisfatória entre ambas, de acordo com parâmetros pré definidos. Além disso, eles mostram a robustez das propriedades de regularização do filtro Gaussiano, comparando a convolução do mesmo com uma imagem $I(x, y)$ vista como a solução da equação do calor no caso bidimensional.\\
     Tendo devidamente estudado a etapa de regularização e filtragem, a etapa de diferenciação foi dividida nos operados diferenciais direcionais e os operados diferenciais invariantes à rotação.\\
     O primeiro provoca manchas nos contornos com passagens em zero, mas não pelo uso do operador e sim pela distorção introduzida por um operador de largura demasiada.\\
-    No caso dos operadores invariantes à rotação, dois deles merecem destaque por serem amplamente utilizados em função de possuírem características interessantes que são o Laplaciano $\nabla ^2$, que é um operador linear e a derivada segunda ao longo do gradiente $\frac{\partial^2}{\partial n^2}$, que é um operador não linear.
+    No caso dos operadores invariantes à rotação, dois deles merecem destaque por serem amplamente utilizados em função de possuírem características interessantes que são o Laplaciano $\nabla ^2$, que é um operador linear e a derivada segunda ao longo do gradiente $\partial^2 /\ \partial n^2$, que é um operador não linear.\\
+    Propriedades dos operadores invariantes à rotação são, então, derivadas, especialmente àquelas relacionadas a passagens em zero que mostram, por exemplo, que em dadas condições, as derivadas tanto do Laplaciano quanto da derivada segunda ao longo do gradiente coincidem. Outra propriedade interessante destes operadores é que eles são rotacionalmente simétricos, conforme visto em suas respectivas representações em coordenadas polares.\\
+    Um estudo das propriedades geométricas e topológicas dos contornos também foi fornecido mostrando que, em geral, operadores invariantes à rotação detectam bordas mais suaves, curvas fechadas, características normalmente não encontradas nos operadores direcionais.\\
+    Esse estudo se faz importante, já que contornos são frequentemente obtidos a partir de bordas e representam fronteiras entre objetos na imagem. Sendo assim, eles precisam ser curvas fechadas e quando são obtidos a partir das bordas, é necessário interligá-las, a fim de se obter um contorno fechado, evitando que apenas pontos ou extremos da imagem resultante da derivação sejam a representação das bordas que está se avaliando.
     
-    
-    \textbf{Data analyses?}\\
-    \textbf{Simulations?\\ Benchmarks?}\\
-    \textbf{User studies?}\\
-    \textbf{Case studies?}\\
-    \textbf{Examples?}\\
-    \textbf{In short, what makes the claims scientific (as opposed to being mere opinions1)?}
+    \textbf{Simulations? Benchmarks?}\\
+    Por fim, os autores estabeleceram uma comparação com os principais resultados obtidos e um \textit{overview} de alguns métodos de detecção de borda como o \textit{Difference of Boxes} proposto por Binford, o operador de Shanmugam, Dickey e Green, o Laplaciano do Gaussiano (LOG) de Marr e Hildreth, o método de Haralick e de Canny.
+
+    \textbf{In short, what makes the claims scientific (as opposed to being mere opinions)?}
+    É evidente que o artigo está extremamente bem embasado, com referências a importantes trabalhos que contribuíram para o aperfeiçoamento dos métodos de detecção de borda ao longo dos anos, além de ter demonstrações matemáticas e teoremas consistentes que fundamentam o objetivo principal de encontrar técnicas de regularização para o problema de diferenciação e mostrar que há uma dada ordem na operação desta última e com a filtragem da imagem.
     \\[6pt]
 
     \item \textbf{Conclusão}
     
     \textbf{What are the conclusions?}\\
-    \textbf{What have we learned from the paper?}\\
+    Conforme já mencionado, Torre e Poggio concluíram que a filtragem tem a atribuição de regularizar o problema mal-posto da diferenciação e que ela deve ser realizada antes desta última. Outro ponto importante é que funções prolato regularizam melhor a imagem já que elas deixam a imagem "inteira" e com banda limitada, porém, o filtro Gaussiano tem duas vantagens sobre funções prolato. A primeira é que elas não geram passagens em zero quando o tamanho do filtro é incrementado. A segunda, no caso bidimensional, a Gaussiana pode ser decomposta no produto de dois filtros unidimensionais, o que reduz drasticamente a quantidade de cálculo envolvido na aplicação do filtro.\\
+Uma outra observação importante é que os filtros rotacionalmente simétricos garantem uma alta probabilidade de contornos fechados e bordas mais suaves, o que torna a escolha desses operadores bastante óbvia em detrimento dos filtros direcionais.\\
+Na etapa de diferenciação, quando da aplicação de operadores direcionais, duas derivadas em apenas duas direções são necessárias para encontrar as mudanças de intensidade. No caso de operadores invariantes à rotação, a derivada de segunda ordem ao longo do gradiente tem uma melhore performance do que o Laplaciano, porém, este último é comutativo com a convolução.\\
+Finalmente, propriedades topológicas e geométricas são derivadas de forma a caracterizar os tipos de mudanças de intensidade da imagem em termos de propriedades físicas que as geraram.
+
     \textbf{Shall the standard practice of the field be changed as a result of the new findings?}\\
-    \textbf{Is the result generalizable?}\\
-    \textbf{Can the result be applied to other areas of the field?}\\
+    As práticas de detecção de borda podem ser alteradas de forma a considerar os resultados obtidos pelos autores a fim de gerarem bordas mais suaves e com menos ruído, o que faz os resultados serem, de fato, genéricos.
+    
     \textbf{What are the open problems?}\\
+    Torre e Poggio deixam uma questão em aberto em relação ao funcionamento do sistema visual humano e os operadores diferenciais, ou seja, quais operadores e em que combinações eles devem ser organizados para realizar tarefas sob diferentes condições.
     \textbf{In short, what are the lessons one can learn from the paper?}
+    Em suma, pode-se tomar como lições do artigo que a identificação de transições de intensidade na imagem para detecção de bordas é um problema de diferenciação numérica que precisa ser regularizado no intuito de reduzir a sensibilidade a ruídos. Além disso, para se obter resultados satisfatórios, tais como curvas fechadas e bordas mais suaves, características de diferentes filtros e propriedades geométricas dos operadores diferenciais devem ser detalhadamente avaliadas.
 
 \end{enumerate}
 \end{enumerate}
