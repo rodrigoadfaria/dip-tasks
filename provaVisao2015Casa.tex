@@ -575,24 +575,24 @@ A Figura \ref{fig:fig6}, por exemplo, foi gerada com o vetor de entrada:
 \end{enumerate}  
 
 Logo, um problema é dito mal-posto se alguma das condições acima não é satisfeita.  
-\\No artigo em questão, o problema mal-posto trata-se da diferenciação de uma função $f(x)$ que é um típico problema mal-posto e pode ser visto como a solução do problema inverso visto no resumo em \ref{eq:inverse_problem} e \ref{eq:inverse_int}.
+\\No artigo em questão, o problema mal-posto trata-se da diferenciação de uma função $f(x)$ que é um típico problema mal-posto e pode ser visto como a solução do problema inverso visto no resumo em \ref{eq:inverse_problem} e \ref{eq:inverse_int}.\\
 
 \item O que é regularização?
 \\Regularização, em linhas gerais, é a aproximação de um problema mal-posto por uma família de problemas bem-postos \cite{Engl-1981}.
 \\Conforme visto no item anterior, como temos um problema de diferenciação numérica e é sabido que ele é mal-posto, os autores 
 avaliaram alguns métodos de regularização para, então, aproximar uma solução.
 \\Um dos possíveis métodos são os operadores de Tikhonov que, para equações de convolução como em (\ref{eq:inverse_int}),
-os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)$, onde $\alpha$ é um parâmetro.
-\\
+os operadores correspondem à convolução de $g(x)$ com um filtro $F(x, \alpha)$, onde $\alpha$ é um parâmetro.\\
 
 \item Qual a importância do teorema apresentado no artigo?
-\textbf{TODO}
+\\No caso de dados não exatos, Poggio \textit{et al.} \cite{Poggio1988106} utilizou o terceiro método de regularização proposto por Bertero que, por conseguinte, originou um novo teorema proposto por Torre e Poggio provando que a solução para o problema de diferenciação pode ser obtida pela convolução dos dados com um filtro, o qual é uma spline cúbica e é muito similar a uma Gaussiana.\\
+    Essa implicação é determinante para demonstrar que a convolução dos dados pode, então, ser realizada com um filtro Gaussiano.\\
 
 \item O que são filtros de banda limitada? Qual a sua importância no artigo?
-\textbf{TODO}
+\textbf{TODO}\\
 
 \item Quais são os métodos de encontrar borda apresentados no artigo?
-Os métodos de detecção de borda apresentados no artigo são:
+\\Os métodos de detecção de borda apresentados no artigo são:
 \begin{enumerate}[label*=\arabic*.]
     \item \textbf{Difference of Boxes - DOB}\\
     Proposto por Herskovitz e Binford, o filtro DOB é do tipo suporte limitado e utiliza a função de Haar para filtragem direcional
